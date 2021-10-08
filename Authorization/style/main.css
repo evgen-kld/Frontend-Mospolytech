@@ -1,0 +1,20 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: cornsilk;
+    min-height: 500px;
+}
+
+form {
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.block {
+    margin: 5px;
+}

@@ -1,0 +1,15 @@
+.form-gr {
+    margin-bottom: 20px;
+    
+}
+
+.form-lb {
+    margin-bottom: 10px;
+    display: block;
+    font-weight: bold;
+}
+
+.but {
+    background-color: blue;
+    color: white;
+}

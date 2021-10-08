@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/main.css">
+    <title>Обратная связь</title>
+</head>
+<body>
+    <h1>Форма обратной связи</h1>
+    <div class="container">
+        <form action="https://httpbin.org/post" method="POST" enctype="multipart/form-data">
+            <div class="form-gr">
+            <label class="form-lb" for="name">ФИО</label>
+            <input id="name" type="text" name="name" placeholder="Введите ФИО" value="Иванов" required>
+            </div>
+
+            <div class="form-gr">
+            <label class="form-lb" for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="Введите свою почту" value="123@mail.ru" required>
+            </div>
+
+            <div class="form-gr">
+                <p class="form-lb">Как вы узнали о нас?</p>
+                <input type="radio" name="source" id="add" value="add" checked>
+                <label for="add">Реклама в Интернете</label>
+                <input type="radio" name="source" id="friends" value="friends">
+                <label for="friends">От друзей</label>
+                <input type="radio" name="source" id="list" value="list">
+                <label for="list">Листовка</label>
+                <input type="radio" name="source" id="mail" value="mail">
+                <label for="mail">Рассылка по почте</label>
+            </div>
+
+            <div class="form-gr">
+                <label class="form-lb" for="category">Категория обращения</label>
+                <select name="category" id="category">
+                    <option value="proposal">Предложение</option>
+                    <option value="grievan">Жалоба</option>
+                    <option value="review">Отзыв</option>
+                </select>
+            </div>
+
+            <div class="form-gr">
+                <label class="form-lb" for="mess">Напишите сообщение</label>
+                <textarea name="mess" id="mess" cols="30" rows="10" placeholder="Введите текст сообщения">Какой-то текст</textarea>
+            </div>
+
+
+            <div class="form-gr">
+                <label class="form-lb" for="attachment">Вложение</label>
+                <input type="file" name="attachment" id="attachment">
+            </div>
+
+            <div class="form-gr">
+                <input type="checkbox" name="agreement" id="agreement">
+                <label for="agreement">Даю согласие на обработку персональных данных</label>
+            </div>
+
+            <input class="but"  type="submit" value="Отправить">
+        </form>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/main.css">
+    <title>Авторизация</title>
+</head>
+<body>
+            <form action="https://httpbin.org/post" method="POST">
+                    <div class="block">
+                        <h1>Вход</h1>
+                    </div>
+
+                    <div class="block">
+                        <label for="login">Логин</label>
+                    </div>
+
+                    <div class="block">
+                        <input id="login" type="text" name="login" required>
+                    </div>
+
+                    <div class="block">
+                        <label for="pwd">Пароль</label>
+                    </div>
+
+                    <div class="block">
+                        <input id="pwd" type="password" name="pwd" required>
+                    </div>
+
+                    <div class="block">
+                        <input id="remember" type="checkbox" name="remember">
+                        <label for="remember">Запомни меня</label>
+                    </div>
+
+                    <div class="block">
+                        <input type="submit" value="Отправить"
+                    </div>
+            </form>
+</body>
+</html>
