@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+}
+
+.main-menu {
+    background-color: coral;
+    border-bottom: 5px solid black;
+    padding-top: 20px;
+    min-height: 40px;
+}
+
+.main-menu a {
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-right: 15px;
+    color: black;
+}
+
+.container {
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+.navigation {
+    float: left;
+}
+
+.profile {
+    float: right;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.side-bar {
+    padding: 20px;
+    width: 220px;
+    box-sizing: border-box;
+    float: left;
+}
+
+
+.goods-list {
+    margin-left: 250px;
+    padding-top: 20px;
+}
+
+.goods-img img {
+    height: 150px;
+    margin: 0 auto;
+    display: block;
+}
+
+.goods {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    min-width: 300px;
+    min-height: 250px;
+}
+
+.price-and-buy {
+    height: 50px;
+}
+
+.price {
+    text-align: center;
+    display: inline-block;
+    height: 100%;
+    box-sizing: border-box;
+    width: 50%;
+    background-color: coral;
+    font-weight: 800;
+    font-size: 25px;
+    padding-top: 10px;
+}
+
+.buy {
+    text-align: center;
+    display: inline-block;
+    height: 100%;
+    box-sizing: border-box;
+    width: 50%;
+    background-color: blueviolet;
+    font-weight: 800;
+    font-size: 25px;
+    padding-top: 10px;
+    text-decoration: none;
+}
