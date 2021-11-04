@@ -1,0 +1,55 @@
+html, body, main {
+    height: 100%;
+}
+
+
+main {
+    display: flex;
+}
+
+.calc-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    border: 5px solid rgb(4, 6, 141);
+}
+
+.buttons {
+    display: flex;
+    width: 450px;
+}
+
+.digits {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    justify-content: center;
+}
+
+.other {
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+    justify-content: center;
+}
+
+.key {
+    margin: 10px;
+    font-size: 40px;
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    border: 1px solid blue;
+    background-color: cornflowerblue;
+    cursor: pointer;
+}
+
+.screen {
+    height: 60px;
+    background-color: aqua;
+    border: 3px solid rgb(4, 6, 141);
+    border-radius: 5px;
+    margin: 10px;
+    text-align: right;
+    font-size: 40px;
+}
