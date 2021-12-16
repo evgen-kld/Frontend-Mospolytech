@@ -99,37 +99,38 @@ function compile(str) {
 
 function evaluate(str) {
     let mas = str.split(' ');
-    let buffer = [];
-    let result = Number(mas[0]);
-    for (let i = 1; i < mas.length; i++) {
-        if (mas[i] == '+') {
-            for (let j = 0; j < buffer.length; j++) {
-                result += buffer[j];
+    for (let i = 0; i < mas.length; i++) {
+        if (mas.length == 1) break;
+        if (mas[i] == '+' || mas[i] == '-' || mas[i] == '*' || mas[i] == '/') {
+            if (mas[i] == '+') {
+                mas[i] = Number(mas[i - 2]) + Number(mas[i - 1]);
+                mas.splice(i - 2, 2);
+                i -= 2;
+                continue;
             }
-            buffer = []
+            if (mas[i] == '-') {
+                mas[i] = Number(mas[i - 2]) - Number(mas[i - 1])
+                mas.splice(i - 2, 2);
+                i -= 2;
+                continue;
+            }
+            if (mas[i] == '*') {
+                mas[i] = Number(mas[i - 2]) * Number(mas[i - 1])
+                mas.splice(i - 2, 2);
+                i -= 2;
+                continue;
+            }
+            if (mas[i] == '/') {
+                mas[i] = Number(mas[i - 2]) / Number(mas[i - 1])
+                mas.splice(i - 2, 2);
+                i -= 2;
+                continue;
+            }
         }
-        else if (mas[i] == '-') {
-            for (let j = 0; j < buffer.length; j++) {
-                result -= buffer[j];
-            }
-            buffer = []
-        }  
-        else if (mas[i] == '*') {
-            for (let j = 0; j < buffer.length; j++) {
-                result *= buffer[j];
-            }
-            buffer = []
-        }
-        else if (mas[i] == '/') {
-            for (let j = 0; j < buffer.length; j++) {
-                result /= buffer[j];
-            }
-            buffer = []
-        }  
-        else buffer.push(Number(mas[i]));
     }
-    return result;
+    return mas[0];
 }
+
 
 // Функция clickHandler предназначена для обработки 
 // событий клика по кнопкам калькулятора. 
