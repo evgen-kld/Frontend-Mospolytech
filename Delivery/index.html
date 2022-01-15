@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
+    <script src="main.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <img src="static/knife-fork.png" height="40" width="40">
+                <span class="fs-3 px-3">Вилка и Ложка</span>
+                <img src="static/knife-fork.png" height="40" width="40">
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Главная</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Панель администратора</a></li>
+            </ul>
+        </header>
+    </div>
+
+
+    <main>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="container my-5">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <img class="col-4" src="static/salad.png" width="200" height="200">
+                            <div class="col-6 d-flex align-items-center justify-content-center">
+                                <h1>Только свежие продукты</h1>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <img class="col-4" src="static/delivery.png" width="200" height="200">
+                            <div class="col-6 d-flex align-items-center justify-content-center">
+                                <h1>Самая быстрая доставка</h1>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <img class="col-4" src="static/sale.png" width="200" height="200">
+                            <div class="col-6 d-flex align-items-center justify-content-center">
+                                <h1>Постоянные скидки</h1>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon btn btn-dark" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon btn btn-dark" aria-hidden="true"></span>
+            </button>
+        </div>
+
+
+        <div class="container marketing my-5">
+            <div class="row pt-4">
+                <div class="col-lg-4 d-flex flex-column align-items-center">
+                    <img src="static/burger.png" height="200" width="200">
+                    <h1>БУРГЕРЫ</h1>
+                    <p>Самые сочные!</p>
+                    <p><a class="btn btn-secondary" href="#">Заказать!</a></p>
+                </div>
+
+                <div class="col-lg-4 d-flex flex-column align-items-center">
+                    <img src="static/pizza.png" height="200" width="200">
+                    <h1>ПИЦЦЫ</h1>
+                    <p>Самые токие!</p>
+                    <p><a class="btn btn-secondary" href="#">Попробовать!</a></p>
+                </div>
+
+                <div class="col-lg-4 d-flex flex-column align-items-center">
+                    <img src="static/ice-cream.png" height="200" width="200">
+                    <h1>ДЕСЕРТЫ</h1>
+                    <p>Самые следкие!</p>
+                    <p><a class="btn btn-secondary" href="#">Насладиться!</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="container my-5">
+            <select class="form-select area">
+                <option value="null">Округ</option>
+            </select>
+            <select class="form-select district">
+                <option value="null">Район</option>
+            </select>
+            <select class="form-select type">
+                <option value="null">Вид</option>
+            </select>
+            <div class="form-check">
+                <input class="form-check-input sale" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                Льготы
+                </label>
+            </div>
+            <button type="button" class="btn btn-primary btn-lg search-btn">Поиск</button>
+        </div>
+        <div class="container my-5">
+            <span>
+                <div class="row">
+                    <div class="col-3 d-flex justify-content-center">
+                        <h3>Название</h3>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center">
+                        <h3>Тип</h3>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                        <h3>Адрес</h3>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center">
+                        <h3>Скидка</h3>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </span>
+
+            <div class="place-list">
+                <div class="row my-3">
+                    <div class="col-3 d-flex justify-content-center">
+                        <h5>Кафе «ТЕАТР НА ЮГО-ЗАПАДЕ»</h5>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center">
+                        <h5>кафе</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>город Москва, проспект Вернадского, дом 125</h5>
+                        <h5>Западный административный округ</h5>
+                        <h5>район Тропарёво-Никулино</h5>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center">
+                        <h5>+</h5>
+                    </div>
+                    <div class="col-1 d-flex justify-content-center">
+                        <button type="button" class="btn btn-success">Выбрать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled" data-page="1"><a class="page-link" href="#">Первая страница</a></li>
+                <li class="page-item active"><a class="page-link" data-page="1" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" data-page="2" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" data-page="3" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Последняя страница</a></li>
+            </ul>
+        </nav>
+
+        <footer class="container">
+            <p class="float-end"><a href="#">Back to top</a></p>
+            <p>&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+            </p>
+        </footer>
+    </main>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
