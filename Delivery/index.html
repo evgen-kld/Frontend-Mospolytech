@@ -126,7 +126,7 @@
             </div>
             <button type="button" class="btn btn-primary btn-lg search-btn">Поиск</button>
         </div>
-        <div class="container my-5">
+        <div class="container my-5 px-0">
             <span>
                 <div class="row">
                     <div class="col-3 d-flex justify-content-center">
@@ -146,23 +146,23 @@
             </span>
 
             <div class="place-list">
-                <div class="row my-3">
+                <div class="row my-3 d-none nodeToCopy">
                     <div class="col-3 d-flex justify-content-center">
-                        <h5>Кафе «ТЕАТР НА ЮГО-ЗАПАДЕ»</h5>
+                        <h5 class="place-list-name">Кафе «ТЕАТР НА ЮГО-ЗАПАДЕ»</h5>
                     </div>
                     <div class="col-2 d-flex justify-content-center">
-                        <h5>кафе</h5>
+                        <h5 class="place-list-type">кафе</h5>
                     </div>
                     <div class="col-4">
-                        <h5>город Москва, проспект Вернадского, дом 125</h5>
-                        <h5>Западный административный округ</h5>
-                        <h5>район Тропарёво-Никулино</h5>
+                        <h5 class="place-list-address">город Москва, проспект Вернадского, дом 125</h5>
+                        <h5 class="place-list-area">Западный административный округ</h5>
+                        <h5 class="place-list-district">район Тропарёво-Никулино</h5>
                     </div>
                     <div class="col-2 d-flex justify-content-center">
-                        <h5>+</h5>
+                        <h5 class="place-list-sale">+</h5>
                     </div>
                     <div class="col-1 d-flex justify-content-center">
-                        <button type="button" class="btn btn-success">Выбрать</button>
+                        <button type="button" class="btn btn-success place-list-btn">Выбрать</button>
                     </div>
                 </div>
             </div>
@@ -178,7 +178,7 @@
             </ul>
         </nav>
 
-        <div class="m-5 menu d-flex">
+        <div class="m-5 menu">
             <div class="d-flex justify-content-center">
                 <h3>МЕНЮ</h3>
             </div>
@@ -198,7 +198,7 @@
                     <div id="price-1" class="fs-3">123</div>
                 </div>
                 <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success btn-sm my-2 h-25">Хочу!</button>
+                    <button type="button" class="btn btn-success my-2 text-center">Хочу!</button>
                     <input class="input-group input-group-sm" type="number">
                 </div>
             </div>
@@ -411,49 +411,7 @@
         </footer>
     </main>
 
-    <div class="modal fade" id="task-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Создание новой задачи</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3 row">
-                            <label for="name" class="col-md-3 col-form-label">Название задачи</label>
-                            <div class="col-md-9">
-                                <input type="text" name="name" id="name" class="form-control">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="description" class="col-md-3 col-form-label">Описание задачи</label>
-                            <div class="col-md-9">
-                                <textarea class="form-control" name="description" id="description" cols="30"
-                                    rows="10"></textarea>
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="column" class="col-md-3 col-form-label">Колонка</label>
-                            <div class="col-md-9">
-                                <select class="form-select" name="column" id="column">
-                                    <option value="to-do">To Do</option>
-                                    <option value="done">Done</option>
-                                </select>
-                            </div>
-                        </div>
-                        <input type="hidden" name="task-id">
-                        <input type="hidden" name="action">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary action-task-btn"
-                        data-bs-dismiss="modal">Создать</button>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
