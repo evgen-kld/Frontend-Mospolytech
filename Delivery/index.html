@@ -8,22 +8,23 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="static/style.css">
-    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="staticIndex/style.css">
+    <script type="module" src="lib.js"></script>
+    <script type="module" src="main.js"></script>
 </head>
 
 <body>
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <img src="static/knife-fork.png" height="40" width="40">
+                <img src="staticIndex/knife-fork.png" height="40" width="40">
                 <span class="fs-3 px-3">Вилка и Ложка</span>
-                <img src="static/knife-fork.png" height="40" width="40">
+                <img src="staticIndex/knife-fork.png" height="40" width="40">
             </a>
 
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Главная</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Панель администратора</a></li>
+                <li class="nav-item"><a href="admin.html" class="nav-link">Панель администратора</a></li>
             </ul>
         </header>
     </div>
@@ -44,7 +45,7 @@
                     <div class="carousel-item active">
                         <div class="row">
                             <div class="col-1"></div>
-                            <img class="col-4" src="static/salad.png" width="200" height="200">
+                            <img class="col-4" src="staticIndex/salad.png" width="200" height="200">
                             <div class="col-6 d-flex align-items-center justify-content-center">
                                 <h1>Только свежие продукты</h1>
                             </div>
@@ -54,7 +55,7 @@
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col-1"></div>
-                            <img class="col-4" src="static/delivery.png" width="200" height="200">
+                            <img class="col-4" src="staticIndex/delivery.png" width="200" height="200">
                             <div class="col-6 d-flex align-items-center justify-content-center">
                                 <h1>Самая быстрая доставка</h1>
                             </div>
@@ -64,7 +65,7 @@
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col-1"></div>
-                            <img class="col-4" src="static/sale.png" width="200" height="200">
+                            <img class="col-4" src="staticIndex/sale.png" width="200" height="200">
                             <div class="col-6 d-flex align-items-center justify-content-center">
                                 <h1>Постоянные скидки</h1>
                             </div>
@@ -87,21 +88,21 @@
         <div class="container marketing my-5">
             <div class="row pt-4">
                 <div class="col-lg-4 d-flex flex-column align-items-center">
-                    <img src="static/burger.png" height="200" width="200">
+                    <img src="staticIndex/burger.png" height="200" width="200">
                     <h1>БУРГЕРЫ</h1>
                     <p>Самые сочные!</p>
                     <p><a class="btn btn-secondary" href="#">Заказать!</a></p>
                 </div>
 
                 <div class="col-lg-4 d-flex flex-column align-items-center">
-                    <img src="static/pizza.png" height="200" width="200">
+                    <img src="staticIndex/pizza.png" height="200" width="200">
                     <h1>ПИЦЦЫ</h1>
                     <p>Самые токие!</p>
                     <p><a class="btn btn-secondary" href="#">Попробовать!</a></p>
                 </div>
 
                 <div class="col-lg-4 d-flex flex-column align-items-center">
-                    <img src="static/ice-cream.png" height="200" width="200">
+                    <img src="staticIndex/ice-cream.png" height="200" width="200">
                     <h1>ДЕСЕРТЫ</h1>
                     <p>Самые следкие!</p>
                     <p><a class="btn btn-secondary" href="#">Насладиться!</a></p>
@@ -109,22 +110,36 @@
             </div>
         </div>
         <div class="container my-5">
-            <select class="form-select area">
-                <option value="null">Округ</option>
-            </select>
-            <select class="form-select district">
-                <option value="null">Район</option>
-            </select>
-            <select class="form-select type">
-                <option value="null">Вид</option>
-            </select>
-            <div class="form-check">
-                <input class="form-check-input sale" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                Льготы
-                </label>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <select class="form-select area">
+                        <option value="null">Округ</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <select class="form-select district">
+                        <option value="null">Район</option>
+                    </select>
+                </div>
             </div>
-            <button type="button" class="btn btn-primary btn-lg search-btn">Поиск</button>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <select class="form-select type col-6">
+                        <option value="null">Вид</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <div class="form-check col-6">
+                        <input class="form-check-input sale" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Льготы
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="d-grid">
+                <button type="button" class="btn btn-primary btn-lg search-btn">Поиск</button>
+            </div>
         </div>
         <div class="container my-5 px-0">
             <span>
@@ -138,280 +153,177 @@
                     <div class="col-4 d-flex justify-content-center">
                         <h3>Адрес</h3>
                     </div>
-                    <div class="col-2 d-flex justify-content-center">
+                    <div class="col-1 d-flex justify-content-center">
                         <h3>Скидка</h3>
                     </div>
-                    <div class="col-1"></div>
+                    <div class="col-2"></div>
                 </div>
             </span>
 
             <div class="place-list">
                 <div class="row my-3 d-none nodeToCopy">
                     <div class="col-3 d-flex justify-content-center">
-                        <h5 class="place-list-name">Кафе «ТЕАТР НА ЮГО-ЗАПАДЕ»</h5>
+                        <h5 class="place-list-name"></h5>
                     </div>
                     <div class="col-2 d-flex justify-content-center">
-                        <h5 class="place-list-type">кафе</h5>
+                        <h5 class="place-list-type"></h5>
                     </div>
                     <div class="col-4">
-                        <h5 class="place-list-address">город Москва, проспект Вернадского, дом 125</h5>
-                        <h5 class="place-list-area">Западный административный округ</h5>
-                        <h5 class="place-list-district">район Тропарёво-Никулино</h5>
-                    </div>
-                    <div class="col-2 d-flex justify-content-center">
-                        <h5 class="place-list-sale">+</h5>
+                        <h5 class="place-list-address"></h5>
+                        <h5 class="place-list-area"></h5>
+                        <h5 class="place-list-district"></h5>
                     </div>
                     <div class="col-1 d-flex justify-content-center">
-                        <button type="button" class="btn btn-success place-list-btn">Выбрать</button>
+                        <h5 class="place-list-sale">+</h5>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center">
+                        <button type="button" class="btn btn-success place-list-btn btn-lg">Выбрать</button>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                <li class="page-item start active"><a class="page-link" data-page="start" href="#">Первая страница</a></li>
+                <li class="page-item start active"><a class="page-link" data-page="start" href="#">Первая страница</a>
+                </li>
                 <li class="page-item"><a class="page-link b1" data-page="1" href="#">1</a></li>
                 <li class="page-item"><a class="page-link b2" data-page="2" href="#">2</a></li>
                 <li class="page-item"><a class="page-link b3" data-page="3" href="#">3</a></li>
-                <li class="page-item finish"><a class="page-link" data-page="finish" href="#">Последняя страница</a></li>
+                <li class="page-item finish"><a class="page-link" data-page="finish" href="#">Последняя страница</a>
+                </li>
             </ul>
         </nav>
 
-        <div class="m-5 menu">
+        <div class="m-5 menu d-none">
             <div class="d-flex justify-content-center">
-                <h3>МЕНЮ</h3>
+                <h1 class="display-1">Меню</h1>
             </div>
-            <div class="row my-3">
-                <div class="col-2 d-flex justify-content-center">
-                    <h3>Салат Цезарь</h3>
-                </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p class="fs-6 fw-light">
-                        Куриная грудка, приготовленная по технологии су-вид, обжаренная на гриле, сочные листья салата Айсберг и Латук, хрустящие гренки, перепелиные яйца. Подаем с соусом Цезарь. В соус входят анчоусы.
-                    </p>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                </div>
-                <div class="col-2 d-flex-column justify-content-center">
-                    <h3>Цена</h3>
-                    <div id="price-1" class="fs-3">123</div>
-                </div>
-                <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success my-2 text-center">Хочу!</button>
-                    <input class="input-group input-group-sm" type="number">
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col-2 d-flex justify-content-center">
-                    <h3>Салат Цезарь</h3>
-                </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p class="fs-6 fw-light">
-                        Куриная грудка, приготовленная по технологии су-вид, обжаренная на гриле, сочные листья салата Айсберг и Латук, хрустящие гренки, перепелиные яйца. Подаем с соусом Цезарь. В соус входят анчоусы.
-                    </p>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                </div>
-                <div class="col-2 d-flex-column justify-content-center">
-                    <h3>Цена</h3>
-                    <div id="price-2" class="fs-3">123</div>
-                </div>
-                <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success btn-sm my-2">Добавить в карзину</button>
-                    <input class="input-group input-group-sm" type="number">
+            <div class="row d-flex justify-content-center">
+                <div class="my-2 p-4 forCopy d-none">
+                    <div class="row d-flex justify-content-center align-items-center bg-white rounded-3">
+                        <div class="col-2">
+                            <img class="img-fluid menu-img">
+                        </div>
+                        <div class="col-7 align-self-start">
+                            <p class="display-3 menu-name"></p>
+                            <p class="fs-6 fw-light menu-description"></p>
+                        </div>
+                        <div class="col-2 align-self-start">
+                            <h1 class="display-3 text-center">Цена</h1>
+                            <p class="fw-bold fs-1 text-center menu-price"></p>
+                        </div>
+                        <div class="col-1 d-flex">
+                            <input class="input-group form-control form-control-lg" type="number" value="0">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row my-3">
-                <div class="col-2 d-flex justify-content-center">
-                    <h3>Салат Цезарь</h3>
-                </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p class="fs-6 fw-light">
-                        Куриная грудка, приготовленная по технологии су-вид, обжаренная на гриле, сочные листья салата Айсберг и Латук, хрустящие гренки, перепелиные яйца. Подаем с соусом Цезарь. В соус входят анчоусы.
-                    </p>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                </div>
-                <div class="col-2 d-flex-column justify-content-center">
-                    <h3>Цена</h3>
-                    <div id="price-2" class="fs-3">123</div>
-                </div>
-                <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success btn-sm my-2">Добавить в карзину</button>
-                    <input class="input-group input-group-sm" type="number">
-                </div>
+            <div class="options d-flex justify-content-center mb-3">
+                <h1 class="display-1">Заказ</h1>
             </div>
-            <div class="row my-3">
-                <div class="col-2 d-flex justify-content-center">
-                    <h3>Салат Цезарь</h3>
+            <div class="row">
+                <div class="form-check form-switch col-6 d-flex justify-content-center">
+                    <input class="form-check-input" type="checkbox" id="getQuickDelivery">
+                    <label class="form-check-label"> Быстрая доставка</label>
                 </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p class="fs-6 fw-light">
-                        Куриная грудка, приготовленная по технологии су-вид, обжаренная на гриле, сочные листья салата Айсберг и Латук, хрустящие гренки, перепелиные яйца. Подаем с соусом Цезарь. В соус входят анчоусы.
-                    </p>
+                <div class="form-check form-switch col-6 d-flex justify-content-center">
+                    <input class="form-check-input" type="checkbox" id="getPresent">
+                    <label class="form-check-label"> Получить подарок</label>
                 </div>
-                <div class="col-3 d-flex justify-content-center">
+                <div class="col-6 d-flex justify-content-center">
+                    <h4>Итого:</h4>
+                    <div class="totalPrice">111</div>
                 </div>
-                <div class="col-2 d-flex-column justify-content-center">
-                    <h3>Цена</h3>
-                    <div id="price-3" class="fs-3">123</div>
-                </div>
-                <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success btn-sm my-2">Добавить в карзину</button>
-                    <input class="input-group input-group-sm" type="number">
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col-2 d-flex justify-content-center">
-                    <h3>Салат Цезарь</h3>
-                </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p class="fs-6 fw-light">
-                        Куриная грудка, приготовленная по технологии су-вид, обжаренная на гриле, сочные листья салата Айсберг и Латук, хрустящие гренки, перепелиные яйца. Подаем с соусом Цезарь. В соус входят анчоусы.
-                    </p>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                </div>
-                <div class="col-2 d-flex-column justify-content-center">
-                    <h3>Цена</h3>
-                    <div id="price-4" class="fs-3">123</div>
-                </div>
-                <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success btn-sm my-2">Добавить в карзину</button>
-                    <input class="input-group input-group-sm" type="number">
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col-2 d-flex justify-content-center">
-                    <h3>Салат Цезарь</h3>
-                </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p class="fs-6 fw-light">
-                        Куриная грудка, приготовленная по технологии су-вид, обжаренная на гриле, сочные листья салата Айсберг и Латук, хрустящие гренки, перепелиные яйца. Подаем с соусом Цезарь. В соус входят анчоусы.
-                    </p>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                </div>
-                <div class="col-2 d-flex-column justify-content-center">
-                    <h3>Цена</h3>
-                    <div id="price-5" class="fs-3">123</div>
-                </div>
-                <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success btn-sm my-2">Добавить в карзину</button>
-                    <input class="input-group input-group-sm" type="number">
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col-2 d-flex justify-content-center">
-                    <h3>Салат Цезарь</h3>
-                </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p class="fs-6 fw-light">
-                        Куриная грудка, приготовленная по технологии су-вид, обжаренная на гриле, сочные листья салата Айсберг и Латук, хрустящие гренки, перепелиные яйца. Подаем с соусом Цезарь. В соус входят анчоусы.
-                    </p>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                </div>
-                <div class="col-2 d-flex-column justify-content-center">
-                    <h3>Цена</h3>
-                    <div id="price-6" class="fs-3">123</div>
-                </div>
-                <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success btn-sm my-2">Добавить в карзину</button>
-                    <input class="input-group input-group-sm" type="number">
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col-2 d-flex justify-content-center">
-                    <h3>Салат Цезарь</h3>
-                </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p class="fs-6 fw-light">
-                        Куриная грудка, приготовленная по технологии су-вид, обжаренная на гриле, сочные листья салата Айсберг и Латук, хрустящие гренки, перепелиные яйца. Подаем с соусом Цезарь. В соус входят анчоусы.
-                    </p>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                </div>
-                <div class="col-2 d-flex-column justify-content-center">
-                    <h3>Цена</h3>
-                    <div id="price-7" class="fs-3">123</div>
-                </div>
-                <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success btn-sm my-2">Добавить в карзину</button>
-                    <input class="input-group input-group-sm" type="number">
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col-2 d-flex justify-content-center">
-                    <h3>Салат Цезарь</h3>
-                </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p class="fs-6 fw-light">
-                        Куриная грудка, приготовленная по технологии су-вид, обжаренная на гриле, сочные листья салата Айсберг и Латук, хрустящие гренки, перепелиные яйца. Подаем с соусом Цезарь. В соус входят анчоусы.
-                    </p>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                </div>
-                <div class="col-2 d-flex-column justify-content-center">
-                    <h3>Цена</h3>
-                    <div id="price-8" class="fs-3">123</div>
-                </div>
-                <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success btn-sm my-2">Добавить в карзину</button>
-                    <input class="input-group input-group-sm" type="number">
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col-2 d-flex justify-content-center">
-                    <h3>Салат Цезарь</h3>
-                </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p class="fs-6 fw-light">
-                        Куриная грудка, приготовленная по технологии су-вид, обжаренная на гриле, сочные листья салата Айсберг и Латук, хрустящие гренки, перепелиные яйца. Подаем с соусом Цезарь. В соус входят анчоусы.
-                    </p>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                </div>
-                <div class="col-2 d-flex-column justify-content-center">
-                    <h3>Цена</h3>
-                    <div id="price-2" class="fs-3">123</div>
-                </div>
-                <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success btn-sm my-2">Добавить в карзину</button>
-                    <input class="input-group input-group-sm" type="number">
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col-2 d-flex justify-content-center">
-                    <h3>Салат Цезарь</h3>
-                </div>
-                <div class="col-4 d-flex justify-content-center">
-                    <p class="fs-6 fw-light">
-                        Куриная грудка, приготовленная по технологии су-вид, обжаренная на гриле, сочные листья салата Айсберг и Латук, хрустящие гренки, перепелиные яйца. Подаем с соусом Цезарь. В соус входят анчоусы.
-                    </p>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
-                </div>
-                <div class="col-2 d-flex-column justify-content-center">
-                    <h3>Цена</h3>
-                    <div id="price-10" class="fs-3">123</div>
-                </div>
-                <div class="col-1 d-flex justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-success btn-sm my-2">Добавить в карзину</button>
-                    <input class="input-group input-group-sm" type="number">
+                <div class="col-6 d-flex justify-content-center">
+                    <button data-bs-toggle="modal" data-bs-target="#count-modal" class="btn btn-info">Информация о заказе</button>
                 </div>
             </div>
         </div>
 
-        <footer class="container">
-            <p class="float-end"><a href="#">Back to top</a></p>
-            <p>&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
-            </p>
-        </footer>
+
+        <div class="modal fade" id="count-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Информация о текущем заказе</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-2 row">
+                                <label for="name" class="col-md-3 col-form-label">Название заведения</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="name" id="modal-name" class="form-control-plaintext"
+                                        value="123">
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="area" class="col-md-3 col-form-label">Округ</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="name" id="modal-area" class="form-control-plaintext"
+                                        value="123">
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="district" class="col-md-3 col-form-label">Район</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="name" id="modal-district" class="form-control-plaintext"
+                                        value="123">
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="address" class="col-md-3 col-form-label">Адрес</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="name" id="modal-address" class="form-control-plaintext"
+                                        value="123">
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label for="rate" class="col-md-3 col-form-label">Рейтинг</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="name" id="modal-rate" class="form-control-plaintext"
+                                        value="123">
+                                </div>
+                            </div>
+                            <div class="mb-2 d-flex justify-content-center">
+                                <h3>Ваш выбор</h3>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Название</th>
+                                        <th scope="col">Количество</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tb">
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary action-task-btn"
+                                    data-bs-dismiss="modal">Закрыть</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <footer class="container">
+                <p class="float-end"><a href="#">Back to top</a></p>
+                <p>&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+                </p>
+            </footer>
+        </div>
     </main>
 
-   
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

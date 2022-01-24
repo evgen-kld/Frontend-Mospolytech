@@ -1,10 +1,155 @@
+import {printHelloWorld} from './lib.js'
+
+printHelloWorld()
+
 let data = null;
 let param = [undefined, undefined, undefined, undefined];
 let newArray = [];
+let selectPlace = [];
+let totalPrice = [1, false, 0]
+let setArray = {'1' : 0,
+    '2' : 0,
+    '3' : 0,
+    '4' : 0,
+    '5' : 0,
+    '6' : 0,
+    '7' : 0,
+    '8' : 0,
+    '9' : 0,
+    '10' : 0,
+}
+let json = JSON.parse(`{
+    "set1": [
+      "Салат Цезарь",
+      "Салат Айсберг, помидоры черри, куриное филе в кляре, обжаренное во фритюре, сыр пармезан, соус цезарь, чесночные сухари.",
+      "staticIndex/s1.png"
+    ],
+    "set2": [
+      "Салат Греческий",
+      "Помидор, салат айсберг, огурец, перец болгарский, маслины, лук красный, сыр брынза, соус песто.",
+      "staticIndex/s2.png"
+    ],
+    "set3": [
+      "Мисо-Суп",
+      "Грибы шиитаке, вакаме, мисо паста темная, мисо паста светлая, приправа хондаши, сыр тофу, лук зеленый, белый кунжут жареный.",
+      "staticIndex/s3.png"
+    ],
+    "set4": [
+      "Ролл Филадельфия",
+      "Лосось, огурец, сыр сливочный.",
+      "staticIndex/s4.png"
+    ],
+    "set5": [
+      "Поке с Креветками",
+      "Креветки жареные, рис, салат айсберг, огурец, помидоры черри, такуан, сыр сливочный, водоросли маринованные чука, соус соевый, соус гамадари, белый кунжут.",
+      "staticIndex/s5.png"
+    ],
+    "set6": [
+      "Поке с Курицей",
+      "Куриное филе в кляре, обжаренное во фритюре, рис, салат айсберг, огурец, помидоры черри, такуан, сыр сливочный, водоросли маринованные чука, соус терияки, соус гамадари, белый кунжут.",
+      "staticIndex/s6.png"
+    ],
+    "set7": [
+      "Пицца Пепперони",
+      "Пицца, которая не оставит равнодушным ни одного гурмана: нежнейшее тесто, таящий во рту сыр моцарелла в сочетании с пепперони и томатным соусом.",
+      "staticIndex/s7.png"
+    ],
+    "set8": [
+      "Пицца Маргарита",
+      "Вкусное, тонкое тесто, сладкие помидоры и сыр моцарелла, украшенные сверху петрушкой – ингредиенты вашего идеального вечера.",
+      "staticIndex/s8.png"
+    ],
+    "set9": [
+      "Пицца Гавайская",
+      "Отличное сочетание нежного сыра моцарелла с куриной грудкой холодного копчения и консервированными ананасами в гавайском соусе для любителей необычных сочетаний.",
+      "staticIndex/s9.png"
+    ],
+    "set10": [
+      "Клубничный Пирог",
+      "Восхитительный пирог со всежей клубникой и творогом.",
+      "staticIndex/s10.png"
+    ]
+}`)
+
+function countTotalPrice() {
+    totalPrice[2] = 0
+    for (let i = 1; i < 11; i++) {
+        if (setArray[i] != 0) {
+            totalPrice[2] += Number(setArray[i]) * eval('selectPlace.set_' + i)
+        }
+    }
+    totalPrice[2] *= totalPrice[0]
+    document.querySelector('.totalPrice').innerHTML = Math.round(totalPrice[2])
+}
+
+function updateDeliveryOptions(event) {
+    totalPrice[0] = (event.target.checked) ? 1.2 : 1
+    countTotalPrice()
+}
+
+function updatePresentOptions(event) {
+    let presentNumber = Math.random(1,11)
+}
+
+function createStrInTable(key, i) {
+    let tr = document.createElement('tr')
+    let th = document.createElement('th')
+    th.setAttribute('scope', 'row')
+    th.innerHTML = i
+    tr.append(th)
+    th = document.createElement('th')
+    th.innerHTML = json[`set${key}`][0]
+    tr.append(th)
+    th = document.createElement('th')
+    th.innerHTML = setArray[key]
+    tr.append(th)
+    return tr
+}
+
+function updateModal() {
+    document.getElementById('modal-name').value = selectPlace.name
+    document.getElementById('modal-area').value = selectPlace.admArea
+    document.getElementById('modal-district').value = selectPlace.district
+    document.getElementById('modal-address').value = selectPlace.address
+    document.getElementById('modal-rate').value = selectPlace.rate
+    let table = document.querySelector('.tb')
+    table.innerHTML = ''
+    let i = 1
+    for (key in setArray) {
+        if (setArray[key] > 0) {
+            table.append(createStrInTable(key, i))
+            i++
+        }
+    }
+}
+
+
+function changeOrder(event) {
+    setArray[(event.target.dataset.number)] = event.target.value;
+    countTotalPrice();
+}
+
+function renderMenu() {
+    for (let i = 1; i < 11; i++) {
+        let elem = document.querySelector('.forCopy').cloneNode(true);
+        elem.classList.remove('d-none')
+        elem.querySelector('.menu-name').innerHTML = json[`set${i}`][0]
+        elem.querySelector('.menu-description').innerHTML = json[`set${i}`][1]
+        elem.querySelector('.menu-img').setAttribute('src', json[`set${i}`][2])
+        elem.querySelector('.input-group').classList.add(`numberOfSets-${i - 1}`)
+        elem.querySelector('.input-group').setAttribute('data-number', i)
+        elem.querySelector('.menu-price').innerHTML = selectPlace[`set_${i}`] + ' р.'
+        document.querySelector('.options').before(elem)
+    }
+}
 
 function placeBtnHandler(event) {
-    let a = event.target.id
-    console.log(a)
+    if (event.target.id == '') return
+    document.querySelector('.menu').classList.remove('d-none')
+    for (let i = 0; i < newArray.length; i++) {
+        if (newArray[i].id == event.target.id) selectPlace = newArray[i]
+    }
+    renderMenu()
 }
 
 function getSortedArray(array) {
@@ -130,9 +275,7 @@ function createListItemElement(place) {
 
 function noRecords() {
     let element = document.createElement('div');
-    element.classList.add('d-flex');
-    element.classList.add('justify-content-center');
-    element.classList.add('noRecord');
+    element.classList.add('d-flex', 'justify-content-center', 'noRecord');
     let textElem = document.createElement('h3');
     textElem.innerHTML = 'Записей нет!';
     element.append(textElem);
@@ -202,6 +345,14 @@ function downloadData() {
         createArray();
     }
     xhr.send();
+    // let address = './static/menu.json'
+    // let xhr1 = new XMLHttpRequest();
+    // xhr1.open('GET', address);
+    // xhr1.responseType = 'json';
+    // xhr1.onload = function () {
+    //     let json = this.response
+    // }
+    // xhr1.send();
 }
 
 
@@ -211,4 +362,8 @@ window.onload = function () {
     document.querySelector('.pagination').onclick = pageBtnHandler;
     document.querySelector('.search-btn').onclick = searchBtnHandler;
     document.querySelector('.place-list').onclick = placeBtnHandler;
+    document.querySelector('.menu').oninput = changeOrder;
+    document.querySelector('.btn-info').onclick = updateModal;
+    document.getElementById('getQuickDelivery').onclick = updateDeliveryOptions;
+    document.getElementById('getPresent').onclick = updatePresentOptions;
 }
