@@ -16,6 +16,3 @@ export function createListItemElement(place) {
     return element;
 }
 
-export function printHelloWorld() {
-    console.log('HelloWorld!')
-}

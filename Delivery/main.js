@@ -1,7 +1,6 @@
-import {printHelloWorld} from './lib.js'
+import {createListItemElement} from './lib.js'
 
-printHelloWorld()
-
+let json = null
 let data = null;
 let param = [undefined, undefined, undefined, undefined];
 let newArray = [];
@@ -18,58 +17,58 @@ let setArray = {'1' : 0,
     '9' : 0,
     '10' : 0,
 }
-let json = JSON.parse(`{
-    "set1": [
-      "Салат Цезарь",
-      "Салат Айсберг, помидоры черри, куриное филе в кляре, обжаренное во фритюре, сыр пармезан, соус цезарь, чесночные сухари.",
-      "staticIndex/s1.png"
-    ],
-    "set2": [
-      "Салат Греческий",
-      "Помидор, салат айсберг, огурец, перец болгарский, маслины, лук красный, сыр брынза, соус песто.",
-      "staticIndex/s2.png"
-    ],
-    "set3": [
-      "Мисо-Суп",
-      "Грибы шиитаке, вакаме, мисо паста темная, мисо паста светлая, приправа хондаши, сыр тофу, лук зеленый, белый кунжут жареный.",
-      "staticIndex/s3.png"
-    ],
-    "set4": [
-      "Ролл Филадельфия",
-      "Лосось, огурец, сыр сливочный.",
-      "staticIndex/s4.png"
-    ],
-    "set5": [
-      "Поке с Креветками",
-      "Креветки жареные, рис, салат айсберг, огурец, помидоры черри, такуан, сыр сливочный, водоросли маринованные чука, соус соевый, соус гамадари, белый кунжут.",
-      "staticIndex/s5.png"
-    ],
-    "set6": [
-      "Поке с Курицей",
-      "Куриное филе в кляре, обжаренное во фритюре, рис, салат айсберг, огурец, помидоры черри, такуан, сыр сливочный, водоросли маринованные чука, соус терияки, соус гамадари, белый кунжут.",
-      "staticIndex/s6.png"
-    ],
-    "set7": [
-      "Пицца Пепперони",
-      "Пицца, которая не оставит равнодушным ни одного гурмана: нежнейшее тесто, таящий во рту сыр моцарелла в сочетании с пепперони и томатным соусом.",
-      "staticIndex/s7.png"
-    ],
-    "set8": [
-      "Пицца Маргарита",
-      "Вкусное, тонкое тесто, сладкие помидоры и сыр моцарелла, украшенные сверху петрушкой – ингредиенты вашего идеального вечера.",
-      "staticIndex/s8.png"
-    ],
-    "set9": [
-      "Пицца Гавайская",
-      "Отличное сочетание нежного сыра моцарелла с куриной грудкой холодного копчения и консервированными ананасами в гавайском соусе для любителей необычных сочетаний.",
-      "staticIndex/s9.png"
-    ],
-    "set10": [
-      "Клубничный Пирог",
-      "Восхитительный пирог со всежей клубникой и творогом.",
-      "staticIndex/s10.png"
-    ]
-}`)
+// let json = JSON.parse(`{
+//     "set1": [
+//       "Салат Цезарь",
+//       "Салат Айсберг, помидоры черри, куриное филе в кляре, обжаренное во фритюре, сыр пармезан, соус цезарь, чесночные сухари.",
+//       "staticIndex/s1.png"
+//     ],
+//     "set2": [
+//       "Салат Греческий",
+//       "Помидор, салат айсберг, огурец, перец болгарский, маслины, лук красный, сыр брынза, соус песто.",
+//       "staticIndex/s2.png"
+//     ],
+//     "set3": [
+//       "Мисо-Суп",
+//       "Грибы шиитаке, вакаме, мисо паста темная, мисо паста светлая, приправа хондаши, сыр тофу, лук зеленый, белый кунжут жареный.",
+//       "staticIndex/s3.png"
+//     ],
+//     "set4": [
+//       "Ролл Филадельфия",
+//       "Лосось, огурец, сыр сливочный.",
+//       "staticIndex/s4.png"
+//     ],
+//     "set5": [
+//       "Поке с Креветками",
+//       "Креветки жареные, рис, салат айсберг, огурец, помидоры черри, такуан, сыр сливочный, водоросли маринованные чука, соус соевый, соус гамадари, белый кунжут.",
+//       "staticIndex/s5.png"
+//     ],
+//     "set6": [
+//       "Поке с Курицей",
+//       "Куриное филе в кляре, обжаренное во фритюре, рис, салат айсберг, огурец, помидоры черри, такуан, сыр сливочный, водоросли маринованные чука, соус терияки, соус гамадари, белый кунжут.",
+//       "staticIndex/s6.png"
+//     ],
+//     "set7": [
+//       "Пицца Пепперони",
+//       "Пицца, которая не оставит равнодушным ни одного гурмана: нежнейшее тесто, таящий во рту сыр моцарелла в сочетании с пепперони и томатным соусом.",
+//       "staticIndex/s7.png"
+//     ],
+//     "set8": [
+//       "Пицца Маргарита",
+//       "Вкусное, тонкое тесто, сладкие помидоры и сыр моцарелла, украшенные сверху петрушкой – ингредиенты вашего идеального вечера.",
+//       "staticIndex/s8.png"
+//     ],
+//     "set9": [
+//       "Пицца Гавайская",
+//       "Отличное сочетание нежного сыра моцарелла с куриной грудкой холодного копчения и консервированными ананасами в гавайском соусе для любителей необычных сочетаний.",
+//       "staticIndex/s9.png"
+//     ],
+//     "set10": [
+//       "Клубничный Пирог",
+//       "Восхитительный пирог со всежей клубникой и творогом.",
+//       "staticIndex/s10.png"
+//     ]
+// }`)
 
 function countTotalPrice() {
     totalPrice[2] = 0
@@ -205,7 +204,7 @@ function renderPageBtn(page) {
         let nowBtn = document.querySelector(`.page-link.b1`);
         nowBtn.setAttribute('data-page', 1)
         nowBtn.innerHTML = 1
-        nowBtnParent = nowBtn.closest('.page-item');
+        let nowBtnParent = nowBtn.closest('.page-item');
         nowBtnParent.classList.add('active');
         nowBtn = document.querySelector(`.page-link.b2`);
         nowBtn.setAttribute('data-page', 2)
@@ -223,7 +222,7 @@ function renderPageBtn(page) {
         let nowBtn = document.querySelector('.page-link.b2');
         nowBtn.setAttribute('data-page', page)
         nowBtn.innerHTML = page;
-        nowBtnParent = nowBtn.closest('.page-item');
+        let nowBtnParent = nowBtn.closest('.page-item');
         nowBtnParent.classList.add('active');
         nowBtn = document.querySelector('.page-link.b1');
         nowBtn.setAttribute('data-page', page - 1)
@@ -236,7 +235,7 @@ function renderPageBtn(page) {
         let startBtn = document.querySelector('.page-item.finish');
         startBtn.classList.add('disabled')
         let nowBtn = document.querySelector('.page-link.b3');
-        nowBtnParent = nowBtn.closest('.page-item');
+        let nowBtnParent = nowBtn.closest('.page-item');
         nowBtnParent.classList.add('active');
         nowBtn.setAttribute('data-page', lastPage)
         nowBtn.innerHTML = lastPage;
@@ -259,19 +258,19 @@ function pagination(page) {
 
 
 
-function createListItemElement(place) {
-    let element = document.querySelector('.nodeToCopy').cloneNode(true);
-    element.classList.remove('d-none');
-    element.classList.add('forDelete');
-    element.querySelector('.place-list-name').innerHTML = place.name;
-    element.querySelector('.place-list-type').innerHTML = place.typeObject;;
-    element.querySelector('.place-list-address').innerHTML = place.address;
-    element.querySelector('.place-list-area').innerHTML = place.admArea;
-    element.querySelector('.place-list-district').innerHTML = place.district;
-    element.querySelector('.place-list-sale').innerHTML = place.socialPrivileges ? '+' : '-'
-    element.querySelector('.place-list-btn').setAttribute('id', place.id);
-    return element;
-}
+// function createListItemElement(place) {
+//     let element = document.querySelector('.nodeToCopy').cloneNode(true);
+//     element.classList.remove('d-none');
+//     element.classList.add('forDelete');
+//     element.querySelector('.place-list-name').innerHTML = place.name;
+//     element.querySelector('.place-list-type').innerHTML = place.typeObject;;
+//     element.querySelector('.place-list-address').innerHTML = place.address;
+//     element.querySelector('.place-list-area').innerHTML = place.admArea;
+//     element.querySelector('.place-list-district').innerHTML = place.district;
+//     element.querySelector('.place-list-sale').innerHTML = place.socialPrivileges ? '+' : '-'
+//     element.querySelector('.place-list-btn').setAttribute('id', place.id);
+//     return element;
+// }
 
 function noRecords() {
     let element = document.createElement('div');
@@ -345,14 +344,14 @@ function downloadData() {
         createArray();
     }
     xhr.send();
-    // let address = './static/menu.json'
-    // let xhr1 = new XMLHttpRequest();
-    // xhr1.open('GET', address);
-    // xhr1.responseType = 'json';
-    // xhr1.onload = function () {
-    //     let json = this.response
-    // }
-    // xhr1.send();
+    let address = './staticIndex/menu.json'
+    let xhr1 = new XMLHttpRequest();
+    xhr1.open('GET', address);
+    xhr1.responseType = 'json';
+    xhr1.onload = function () {
+        json = this.response
+    }
+    xhr1.send();
 }
 
 
