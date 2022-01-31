@@ -1,23 +1,24 @@
 'use strict'
 
-import {createListItemElement, renderPageBtn} from './lib.js'
+// import {pagination, createListItemElement, renderPageBtn, pageBtnHandler} from './lib.js'
 
 let json = null
 let data = null;
 let param = [undefined, undefined, undefined, undefined];
 let newArray = [];
 let selectPlace = [];
-let totalPrice = [1, false, 0]
-let setArray = {'1' : 0,
-    '2' : 0,
-    '3' : 0,
-    '4' : 0,
-    '5' : 0,
-    '6' : 0,
-    '7' : 0,
-    '8' : 0,
-    '9' : 0,
-    '10' : 0,
+let totalPrice = [1, 0, 0] //[быстрая доставка, подарок, стоимость]
+let setArray = {
+    '1': 0,
+    '2': 0,
+    '3': 0,
+    '4': 0,
+    '5': 0,
+    '6': 0,
+    '7': 0,
+    '8': 0,
+    '9': 0,
+    '10': 0,
 }
 // let json = JSON.parse(`{
 //     "set1": [
@@ -74,13 +75,14 @@ let setArray = {'1' : 0,
 
 function countTotalPrice() {
     totalPrice[2] = 0
+    if (totalPrice[1] != 0) totalPrice[2] -= Number(setArray[totalPrice[1]]) * eval('selectPlace.set_' + totalPrice[1])
     for (let i = 1; i < 11; i++) {
         if (setArray[i] != 0) {
             totalPrice[2] += Number(setArray[i]) * eval('selectPlace.set_' + i)
         }
     }
     totalPrice[2] *= totalPrice[0]
-    document.querySelector('.totalPrice').innerHTML = Math.round(totalPrice[2])
+    document.querySelector('.totalPrice').innerHTML = `Итого: ${Math.round(totalPrice[2])} рублей`
 }
 
 function updateDeliveryOptions(event) {
@@ -89,7 +91,14 @@ function updateDeliveryOptions(event) {
 }
 
 function updatePresentOptions(event) {
-    let presentNumber = Math.random(1,11)
+    if (event.target.checked) {
+        totalPrice[1] = Math.floor(Math.random() * 10) + 1
+        setArray[totalPrice[1]] += 1
+    }
+    else {
+        setArray[totalPrice[1]] -= 1
+        totalPrice[1] = 0
+    }
 }
 
 function createStrInTable(key, i) {
@@ -102,9 +111,33 @@ function createStrInTable(key, i) {
     th.innerHTML = json[`set${key}`][0]
     tr.append(th)
     th = document.createElement('th')
+    th.classList.add('d-flex', 'justify-content-center')
     th.innerHTML = setArray[key]
     tr.append(th)
     return tr
+}
+
+function createOptionsInModal() {
+    let elem = document.querySelector('.modal-option')
+    elem.innerHTML = ''
+    if (totalPrice[0] == 1 && totalPrice[1] == 0) {
+        let option = document.createElement('div');
+        option.classList.add('h5');
+        option.innerHTML = 'Вы не выбрали дополнительных опций'
+        elem.append(option)
+    }
+    if (totalPrice[0] == 1.2) {
+        let option = document.createElement('div');
+        option.classList.add('h4');
+        option.innerHTML = 'Быстрая доставка'
+        elem.append(option)
+    }
+    if (totalPrice[1] != 0) {
+        let option = document.createElement('div');
+        option.classList.add('h4');
+        option.innerHTML = `Подарок (${eval('json.set' + totalPrice[1] + '[0]')})`
+        elem.append(option)
+    }
 }
 
 function updateModal() {
@@ -116,11 +149,25 @@ function updateModal() {
     let table = document.querySelector('.tb')
     table.innerHTML = ''
     let i = 1
-    for (key in setArray) {
+    for (var key in setArray) {
         if (setArray[key] > 0) {
             table.append(createStrInTable(key, i))
             i++
         }
+    }
+    createOptionsInModal()
+}
+
+function renderRecords(array) {
+    let placeList = document.querySelector('.place-list');
+    if (placeList.querySelector('.noRecord')) placeList.querySelector('.noRecord').remove()
+    while (placeList.querySelector('.forDelete')) placeList.querySelector('.forDelete').remove();
+    if (array.length == 0) {
+        placeList.append(noRecords());
+        return
+    }
+    for (let i = 0; i < array.length; i++) {
+        placeList.append(createListItemElement(array[i]));
     }
 }
 
@@ -134,6 +181,7 @@ function renderMenu() {
     for (let i = 1; i < 11; i++) {
         let elem = document.querySelector('.forCopy').cloneNode(true);
         elem.classList.remove('d-none')
+        elem.classList.add('forDelete')
         elem.querySelector('.menu-name').innerHTML = json[`set${i}`][0]
         elem.querySelector('.menu-description').innerHTML = json[`set${i}`][1]
         elem.querySelector('.menu-img').setAttribute('src', json[`set${i}`][2])
@@ -149,6 +197,9 @@ function placeBtnHandler(event) {
     document.querySelector('.menu').classList.remove('d-none')
     for (let i = 0; i < newArray.length; i++) {
         if (newArray[i].id == event.target.id) selectPlace = newArray[i]
+    }
+    while (document.querySelector('.forDelete')) {
+        document.querySelector('.forDelete').remove()
     }
     renderMenu()
 }
@@ -182,73 +233,73 @@ function pageBtnHandler(event) {
     }
 }
 
-// function renderPageBtn(page) {
-//     let lastPage = newArray.length / 10
-//     if (document.querySelector('.pagination.d-none')) document.querySelector('.pagination.d-none').classList.remove('d-none')
-//     let activeBtn = document.querySelector('.page-item.active');
-//     activeBtn.classList.remove('active')
-//     let firstBtn = document.querySelector('.page-item.start');
-//     if (page != 1 && firstBtn.classList.contains("disabled")) {
-//         firstBtn.classList.remove('disabled')
-//     }
-//     let finishBtn = document.querySelector('.page-item.finish');
-//     if (page != lastPage && finishBtn.classList.contains("disabled")) {
-//         finishBtn.classList.remove('disabled')
-//     }
-//     if (lastPage == 1 || lastPage == 0) {
-//         btn = document.querySelector('.pagination');
-//         btn.classList.add('d-none')
-//         return
-//     }
-//     if (page == 1 || page == 'start') {
-//         let startBtn = document.querySelector('.page-item.start');
-//         startBtn.classList.add('disabled')
-//         let nowBtn = document.querySelector(`.page-link.b1`);
-//         nowBtn.setAttribute('data-page', 1)
-//         nowBtn.innerHTML = 1
-//         let nowBtnParent = nowBtn.closest('.page-item');
-//         nowBtnParent.classList.add('active');
-//         nowBtn = document.querySelector(`.page-link.b2`);
-//         nowBtn.setAttribute('data-page', 2)
-//         nowBtn.innerHTML = 2
-//         nowBtn = document.querySelector(`.page-link.b3`);
-//         nowBtn.setAttribute('data-page', 3)
-//         nowBtn.innerHTML = 3
-//     }
-//     if (page == 2) {
-//         let nowBtn = document.querySelector(`[data-page='${page}']`);
-//         nowBtnParent = nowBtn.closest('.page-item');
-//         nowBtnParent.classList.add('active');
-//     }
-//     if (page != 2 && page != 1 && page != 'finish') {
-//         let nowBtn = document.querySelector('.page-link.b2');
-//         nowBtn.setAttribute('data-page', page)
-//         nowBtn.innerHTML = page;
-//         let nowBtnParent = nowBtn.closest('.page-item');
-//         nowBtnParent.classList.add('active');
-//         nowBtn = document.querySelector('.page-link.b1');
-//         nowBtn.setAttribute('data-page', page - 1)
-//         nowBtn.innerHTML = page - 1;
-//         nowBtn = document.querySelector('.page-link.b3');
-//         nowBtn.setAttribute('data-page', Number(page) + Number(1))
-//         nowBtn.innerHTML = Number(page) + Number(1);
-//     }
-//     if (page == 'finish' || page == lastPage) {
-//         let startBtn = document.querySelector('.page-item.finish');
-//         startBtn.classList.add('disabled')
-//         let nowBtn = document.querySelector('.page-link.b3');
-//         let nowBtnParent = nowBtn.closest('.page-item');
-//         nowBtnParent.classList.add('active');
-//         nowBtn.setAttribute('data-page', lastPage)
-//         nowBtn.innerHTML = lastPage;
-//         nowBtn = document.querySelector('.page-link.b2');
-//         nowBtn.setAttribute('data-page', lastPage - 1)
-//         nowBtn.innerHTML = lastPage - 1;
-//         nowBtn = document.querySelector('.page-link.b1');
-//         nowBtn.setAttribute('data-page', lastPage - 2)
-//         nowBtn.innerHTML = lastPage - 2;
-//     }
-// }
+function renderPageBtn(page) {
+    let lastPage = newArray.length / 10
+    if (document.querySelector('.pagination.d-none')) document.querySelector('.pagination.d-none').classList.remove('d-none')
+    let activeBtn = document.querySelector('.page-item.active');
+    activeBtn.classList.remove('active')
+    let firstBtn = document.querySelector('.page-item.start');
+    if (page != 1 && firstBtn.classList.contains("disabled")) {
+        firstBtn.classList.remove('disabled')
+    }
+    let finishBtn = document.querySelector('.page-item.finish');
+    if (page != lastPage && finishBtn.classList.contains("disabled")) {
+        finishBtn.classList.remove('disabled')
+    }
+    if (lastPage == 1 || lastPage == 0) {
+        btn = document.querySelector('.pagination');
+        btn.classList.add('d-none')
+        return
+    }
+    if (page == 1 || page == 'start') {
+        let startBtn = document.querySelector('.page-item.start');
+        startBtn.classList.add('disabled')
+        let nowBtn = document.querySelector(`.page-link.b1`);
+        nowBtn.setAttribute('data-page', 1)
+        nowBtn.innerHTML = 1
+        let nowBtnParent = nowBtn.closest('.page-item');
+        nowBtnParent.classList.add('active');
+        nowBtn = document.querySelector(`.page-link.b2`);
+        nowBtn.setAttribute('data-page', 2)
+        nowBtn.innerHTML = 2
+        nowBtn = document.querySelector(`.page-link.b3`);
+        nowBtn.setAttribute('data-page', 3)
+        nowBtn.innerHTML = 3
+    }
+    if (page == 2) {
+        let nowBtn = document.querySelector(`[data-page='${page}']`);
+        let nowBtnParent = nowBtn.closest('.page-item');
+        nowBtnParent.classList.add('active');
+    }
+    if (page != 2 && page != 1 && page != 'finish') {
+        let nowBtn = document.querySelector('.page-link.b2');
+        nowBtn.setAttribute('data-page', page)
+        nowBtn.innerHTML = page;
+        let nowBtnParent = nowBtn.closest('.page-item');
+        nowBtnParent.classList.add('active');
+        nowBtn = document.querySelector('.page-link.b1');
+        nowBtn.setAttribute('data-page', page - 1)
+        nowBtn.innerHTML = page - 1;
+        nowBtn = document.querySelector('.page-link.b3');
+        nowBtn.setAttribute('data-page', Number(page) + Number(1))
+        nowBtn.innerHTML = Number(page) + Number(1);
+    }
+    if (page == 'finish' || page == lastPage) {
+        let startBtn = document.querySelector('.page-item.finish');
+        startBtn.classList.add('disabled')
+        let nowBtn = document.querySelector('.page-link.b3');
+        let nowBtnParent = nowBtn.closest('.page-item');
+        nowBtnParent.classList.add('active');
+        nowBtn.setAttribute('data-page', lastPage)
+        nowBtn.innerHTML = lastPage;
+        nowBtn = document.querySelector('.page-link.b2');
+        nowBtn.setAttribute('data-page', lastPage - 1)
+        nowBtn.innerHTML = lastPage - 1;
+        nowBtn = document.querySelector('.page-link.b1');
+        nowBtn.setAttribute('data-page', lastPage - 2)
+        nowBtn.innerHTML = lastPage - 2;
+    }
+}
 
 function pagination(page) {
     if (page == 'start') page = 1
@@ -260,19 +311,18 @@ function pagination(page) {
 
 
 
-// function createListItemElement(place) {
-//     let element = document.querySelector('.nodeToCopy').cloneNode(true);
-//     element.classList.remove('d-none');
-//     element.classList.add('forDelete');
-//     element.querySelector('.place-list-name').innerHTML = place.name;
-//     element.querySelector('.place-list-type').innerHTML = place.typeObject;;
-//     element.querySelector('.place-list-address').innerHTML = place.address;
-//     element.querySelector('.place-list-area').innerHTML = place.admArea;
-//     element.querySelector('.place-list-district').innerHTML = place.district;
-//     element.querySelector('.place-list-sale').innerHTML = place.socialPrivileges ? '+' : '-'
-//     element.querySelector('.place-list-btn').setAttribute('id', place.id);
-//     return element;
-// }
+function createListItemElement(place) {
+    let element = document.querySelector('.nodeToCopy').cloneNode(true);
+    element.classList.remove('d-none');
+    element.querySelector('.place-list-name').innerHTML = place.name;
+    element.querySelector('.place-list-type').innerHTML = place.typeObject;;
+    element.querySelector('.place-list-address').innerHTML = place.address;
+    element.querySelector('.place-list-area').innerHTML = place.admArea;
+    element.querySelector('.place-list-district').innerHTML = place.district;
+    element.querySelector('.place-list-sale').innerHTML = place.socialPrivileges ? '+' : '-'
+    element.querySelector('.place-list-btn').setAttribute('id', place.id);
+    return element;
+}
 
 function noRecords() {
     let element = document.createElement('div');
@@ -283,18 +333,7 @@ function noRecords() {
     return element;
 }
 
-function renderRecords(array) {
-    let placeList = document.querySelector('.place-list');
-    if (placeList.querySelector('.noRecord')) placeList.querySelector('.noRecord').remove()
-    while (placeList.querySelector('.forDelete')) placeList.querySelector('.forDelete').remove();
-    if (array.length == 0) {
-        placeList.append(noRecords());
-        return
-    }
-    for (let i = 0; i < array.length; i++) {
-        placeList.append(createListItemElement(array[i]));
-    }
-}
+
 
 function createArray() {
     newArray = [];
@@ -346,7 +385,7 @@ function downloadData() {
         createArray();
     }
     xhr.send();
-    let address = './staticIndex/menu.json'
+    let address = './static/menu.json'
     let xhr1 = new XMLHttpRequest();
     xhr1.open('GET', address);
     xhr1.responseType = 'json';

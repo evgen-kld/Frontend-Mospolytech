@@ -3,9 +3,9 @@
 import {renderPageBtn} from './lib.js'
 
 
-
-activeTask = null;
-data = null;
+let newArray = [];
+let activeTask = null;
+let data = null;
 let param = [undefined, undefined, undefined, undefined];
 
 function deleteItem() {
@@ -149,7 +149,7 @@ function pagination(page) {
     if (page == 'finish') page == newArray.length / 10
     let arr = newArray.slice((page - 1) * 10, (page - 1) * 10 + 10)
     renderRecords(arr)
-    renderPageBtn(page)
+    renderPageBtn(page, newArray)
 }
 
 function createArray() {
@@ -207,6 +207,7 @@ function downloadData() {
 
 window.onload = function () {
     downloadData()
+    document.querySelector('.pagination').onclick = pageBtnHandler;
     document.querySelector('.place-list').onclick = placeBtnHandler;
     document.querySelector('.delete-task-btn').onclick = deleteItem;
 }

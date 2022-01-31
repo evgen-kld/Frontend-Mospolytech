@@ -17,9 +17,9 @@
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <img src="staticIndex/knife-fork.png" height="40" width="40">
+                <img src="static/img/knife-fork.png" height="40" width="40">
                 <span class="fs-3 px-3">Вилка и Ложка</span>
-                <img src="staticIndex/knife-fork.png" height="40" width="40">
+                <img src="static/img/knife-fork.png" height="40" width="40">
             </a>
 
             <ul class="nav nav-pills">
@@ -45,7 +45,7 @@
                     <div class="carousel-item active">
                         <div class="row">
                             <div class="col-1"></div>
-                            <img class="col-4" src="staticIndex/salad.png" width="200" height="200">
+                            <img class="col-4" src="static/img/salad.png" width="200" height="200">
                             <div class="col-6 d-flex align-items-center justify-content-center">
                                 <h1>Только свежие продукты</h1>
                             </div>
@@ -55,7 +55,7 @@
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col-1"></div>
-                            <img class="col-4" src="staticIndex/delivery.png" width="200" height="200">
+                            <img class="col-4" src="static/img/delivery.png" width="200" height="200">
                             <div class="col-6 d-flex align-items-center justify-content-center">
                                 <h1>Самая быстрая доставка</h1>
                             </div>
@@ -65,7 +65,7 @@
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col-1"></div>
-                            <img class="col-4" src="staticIndex/sale.png" width="200" height="200">
+                            <img class="col-4" src="static/img/sale.png" width="200" height="200">
                             <div class="col-6 d-flex align-items-center justify-content-center">
                                 <h1>Постоянные скидки</h1>
                             </div>
@@ -88,21 +88,21 @@
         <div class="container marketing my-5">
             <div class="row pt-4">
                 <div class="col-lg-4 d-flex flex-column align-items-center">
-                    <img src="staticIndex/burger.png" height="200" width="200">
+                    <img src="static/img/burger.png" height="200" width="200">
                     <h1>БУРГЕРЫ</h1>
                     <p>Самые сочные!</p>
                     <p><a class="btn btn-secondary" href="#">Заказать!</a></p>
                 </div>
 
                 <div class="col-lg-4 d-flex flex-column align-items-center">
-                    <img src="staticIndex/pizza.png" height="200" width="200">
+                    <img src="static/img/pizza.png" height="200" width="200">
                     <h1>ПИЦЦЫ</h1>
                     <p>Самые токие!</p>
                     <p><a class="btn btn-secondary" href="#">Попробовать!</a></p>
                 </div>
 
                 <div class="col-lg-4 d-flex flex-column align-items-center">
-                    <img src="staticIndex/ice-cream.png" height="200" width="200">
+                    <img src="static/img/ice-cream.png" height="200" width="200">
                     <h1>ДЕСЕРТЫ</h1>
                     <p>Самые следкие!</p>
                     <p><a class="btn btn-secondary" href="#">Насладиться!</a></p>
@@ -214,7 +214,7 @@
                             <p class="fw-bold fs-1 text-center menu-price"></p>
                         </div>
                         <div class="col-1 d-flex">
-                            <input class="input-group form-control form-control-lg" type="number" value="0">
+                            <input class="input-group form-control form-control-lg" type="number" min="0" value="0">
                         </div>
                     </div>
                 </div>
@@ -231,12 +231,16 @@
                     <input class="form-check-input" type="checkbox" id="getPresent">
                     <label class="form-check-label"> Получить подарок</label>
                 </div>
+            </div>
+            <div class="row border border-dark">
                 <div class="col-6 d-flex justify-content-center">
-                    <h4>Итого:</h4>
-                    <div class="totalPrice">111</div>
+                    <div class="totalPrice h3">
+                        Итого: 0 рублей
+                    </div>
                 </div>
                 <div class="col-6 d-flex justify-content-center">
-                    <button data-bs-toggle="modal" data-bs-target="#count-modal" class="btn btn-info">Информация о заказе</button>
+                    <button data-bs-toggle="modal" data-bs-target="#count-modal" class="btn btn-info">Информация о
+                        заказе</button>
                 </div>
             </div>
         </div>
@@ -294,7 +298,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Название</th>
-                                        <th scope="col">Количество</th>
+                                        <th scope="col" class="d-flex justify-content-center">Количество</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tb">
@@ -305,6 +309,20 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="h3">
+                                Выбранные опции:
+                            </div>
+                            <div class="modal-option">
+                                <div class="h5">
+                                    Вы не выбрали дополнительных опций
+                                </div>
+                                <div class="h4">
+                                    Быстрая доставка
+                                </div>
+                                <div class="h4">
+                                    Подарок
+                                </div>
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary action-task-btn"
                                     data-bs-dismiss="modal">Закрыть</button>
