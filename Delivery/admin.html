@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./static/css/admin.css">
@@ -13,6 +14,7 @@
     <script type="module" src="lib.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
@@ -29,33 +31,75 @@
         </header>
     </div>
     <div class="container my-5">
-        <div class="row mb-3">
+        <div class="row m-2">
+            <div class="col-6">
+                <input type="text" class="form-control name" placeholder="Введите название">
+            </div>
             <div class="col-6">
                 <select class="form-select area">
                     <option value="null">Округ</option>
                 </select>
             </div>
+        </div>
+        <div class="row m-2">
             <div class="col-6">
                 <select class="form-select district">
                     <option value="null">Район</option>
                 </select>
             </div>
-        </div>
-        <div class="row mb-3">
             <div class="col-6">
-                <select class="form-select type col-6">
+                <select class="form-select type">
                     <option value="null">Вид</option>
                 </select>
             </div>
+        </div>
+        <div class="row m-2">
             <div class="col-6">
-                <div class="form-check col-6">
-                    <input class="form-check-input sale" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
+                <div class="form-check">
+                    <input class="form-check-input sale" type="checkbox" value="">
+                    <label>
                         Льготы
                     </label>
                 </div>
             </div>
+            <div class="col-6">
+                <div class="form-check">
+                    <input class="form-check-input net" type="checkbox" value="">
+                    <label>
+                        Сетевое заведение
+                    </label>
+                </div>
+            </div>
         </div>
+        <div class="row m-2">
+            <div class="col-4">
+                Дата открытия
+            </div>
+            <div class="col-4">
+                с
+                <input class="open-date-from" type="date">
+            </div>
+            <div class="col-4">
+                по
+                <input class="open-date-to" type="date">
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-2">
+                Количество мест
+            </div>
+            <div class="col-5">
+                от 
+                <input class="seat-from" type="number" min="0" value="0">
+            </div>
+            <div class="col-5">
+                до 
+                <input class="seat-to" type="number" min="0" value="0">
+            </div>           
+        </div>
+
+
+
         <div class="d-grid">
             <button type="button" class="btn btn-primary btn-lg search-btn">Поиск</button>
         </div>
@@ -92,12 +136,10 @@
                     <h5 class="place-list-district"></h5>
                 </div>
                 <div class="col-3 actions d-flex justify-content-center">
-                    <a data-bs-toggle="modal" data-bs-target="#task-modal" data-action="show"
-                        title="Посмотреть">
+                    <a data-bs-toggle="modal" data-bs-target="#task-modal" data-action="show" title="Посмотреть">
                         <i class="fas show fa-2x fa-eye px-2 btn-show"></i>
                     </a>
-                    <a data-bs-toggle="modal" data-bs-target="#task-modal" data-action="edit"
-                        title="Редактировать">
+                    <a data-bs-toggle="modal" data-bs-target="#task-modal" data-action="edit" title="Редактировать">
                         <i class="fas edit fa-2x fa-edit px-2 btn-edit"></i>
                     </a>
                     <a data-bs-toggle="modal" data-bs-target="#remove-task-modal" data-action="remove" title="Удалить">
@@ -146,4 +188,5 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

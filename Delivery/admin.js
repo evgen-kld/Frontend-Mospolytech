@@ -1,12 +1,27 @@
 'use strict'
 
-import {renderPageBtn} from './lib.js'
+// import {renderPageBtn} from './lib.js'
 
-
+console.log(`Кафе «ТЕАТР НА ЮГО-ЗАПАДЕ»`.includes('ТЕАТР'))
 let newArray = [];
 let activeTask = null;
 let data = null;
-let param = [undefined, undefined, undefined, undefined];
+let param = ['null', 'null', 'null', false, "", false, "", "", 0, 0]; 
+//[округ, район, тип, скидка, название, сетевой, мест с, мест по, дата с, дата по]
+
+function searchBtnHandler() {
+    param[0] = document.querySelector('.area').value;
+    param[1] = document.querySelector('.district').value;
+    param[2] = document.querySelector('.type').value;
+    param[3] = document.querySelector('.sale').checked;
+    param[4] = document.querySelector('.name').value;
+    param[5] = document.querySelector('.net').checked;
+    param[6] = document.querySelector('.open-date-from').value;
+    param[7] = document.querySelector('.open-date-to').value;
+    param[8] = document.querySelector('.seat-from').value;
+    param[9] = document.querySelector('.seat-to').value;
+    createArray();
+}
 
 function deleteItem() {
     let url = new URL('http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants/' + activeTask)
@@ -47,73 +62,88 @@ function placeBtnHandler(event) {
     if (event.target.classList[1] == 'remove') removeItemModal(selectPlace)
 }
 
-// function renderPageBtn(page) {
-//     let lastPage = newArray.length / 10
-//     if (document.querySelector('.pagination.d-none')) document.querySelector('.pagination.d-none').classList.remove('d-none')
-//     let activeBtn = document.querySelector('.page-item.active');
-//     activeBtn.classList.remove('active')
-//     let firstBtn = document.querySelector('.page-item.start');
-//     if (page != 1 && firstBtn.classList.contains("disabled")) {
-//         firstBtn.classList.remove('disabled')
-//     }
-//     let finishBtn = document.querySelector('.page-item.finish');
-//     if (page != lastPage && finishBtn.classList.contains("disabled")) {
-//         finishBtn.classList.remove('disabled')
-//     }
-//     if (lastPage == 1 || lastPage == 0) {
-//         btn = document.querySelector('.pagination');
-//         btn.classList.add('d-none')
-//         return
-//     }
-//     if (page == 1 || page == 'start') {
-//         let startBtn = document.querySelector('.page-item.start');
-//         startBtn.classList.add('disabled')
-//         let nowBtn = document.querySelector(`.page-link.b1`);
-//         nowBtn.setAttribute('data-page', 1)
-//         nowBtn.innerHTML = 1
-//         let nowBtnParent = nowBtn.closest('.page-item');
-//         nowBtnParent.classList.add('active');
-//         nowBtn = document.querySelector(`.page-link.b2`);
-//         nowBtn.setAttribute('data-page', 2)
-//         nowBtn.innerHTML = 2
-//         nowBtn = document.querySelector(`.page-link.b3`);
-//         nowBtn.setAttribute('data-page', 3)
-//         nowBtn.innerHTML = 3
-//     }
-//     if (page == 2) {
-//         let nowBtn = document.querySelector(`[data-page='${page}']`);
-//         nowBtnParent = nowBtn.closest('.page-item');
-//         nowBtnParent.classList.add('active');
-//     }
-//     if (page != 2 && page != 1 && page != 'finish') {
-//         let nowBtn = document.querySelector('.page-link.b2');
-//         nowBtn.setAttribute('data-page', page)
-//         nowBtn.innerHTML = page;
-//         let nowBtnParent = nowBtn.closest('.page-item');
-//         nowBtnParent.classList.add('active');
-//         nowBtn = document.querySelector('.page-link.b1');
-//         nowBtn.setAttribute('data-page', page - 1)
-//         nowBtn.innerHTML = page - 1;
-//         nowBtn = document.querySelector('.page-link.b3');
-//         nowBtn.setAttribute('data-page', Number(page) + Number(1))
-//         nowBtn.innerHTML = Number(page) + Number(1);
-//     }
-//     if (page == 'finish' || page == lastPage) {
-//         let startBtn = document.querySelector('.page-item.finish');
-//         startBtn.classList.add('disabled')
-//         let nowBtn = document.querySelector('.page-link.b3');
-//         let nowBtnParent = nowBtn.closest('.page-item');
-//         nowBtnParent.classList.add('active');
-//         nowBtn.setAttribute('data-page', lastPage)
-//         nowBtn.innerHTML = lastPage;
-//         nowBtn = document.querySelector('.page-link.b2');
-//         nowBtn.setAttribute('data-page', lastPage - 1)
-//         nowBtn.innerHTML = lastPage - 1;
-//         nowBtn = document.querySelector('.page-link.b1');
-//         nowBtn.setAttribute('data-page', lastPage - 2)
-//         nowBtn.innerHTML = lastPage - 2;
-//     }
-// }
+function pageBtnHandler(event) {
+    if (event.target.dataset.page) {
+        pagination(event.target.dataset.page);
+    }
+}
+
+function noRecords() {
+    let element = document.createElement('div');
+    element.classList.add('d-flex', 'justify-content-center', 'noRecord');
+    let textElem = document.createElement('h3');
+    textElem.innerHTML = 'Записей нет!';
+    element.append(textElem);
+    return element;
+}
+
+function renderPageBtn(page) {
+    let lastPage = newArray.length / 10
+    if (document.querySelector('.pagination.d-none')) document.querySelector('.pagination.d-none').classList.remove('d-none')
+    let activeBtn = document.querySelector('.page-item.active');
+    activeBtn.classList.remove('active')
+    let firstBtn = document.querySelector('.page-item.start');
+    if (page != 1 && firstBtn.classList.contains("disabled")) {
+        firstBtn.classList.remove('disabled')
+    }
+    let finishBtn = document.querySelector('.page-item.finish');
+    if (page != lastPage && finishBtn.classList.contains("disabled")) {
+        finishBtn.classList.remove('disabled')
+    }
+    if (lastPage == 1 || lastPage == 0) {
+        let btn = document.querySelector('.pagination');
+        btn.classList.add('d-none')
+        return
+    }
+    if (page == 1 || page == 'start') {
+        let startBtn = document.querySelector('.page-item.start');
+        startBtn.classList.add('disabled')
+        let nowBtn = document.querySelector(`.page-link.b1`);
+        nowBtn.setAttribute('data-page', 1)
+        nowBtn.innerHTML = 1
+        let nowBtnParent = nowBtn.closest('.page-item');
+        nowBtnParent.classList.add('active');
+        nowBtn = document.querySelector(`.page-link.b2`);
+        nowBtn.setAttribute('data-page', 2)
+        nowBtn.innerHTML = 2
+        nowBtn = document.querySelector(`.page-link.b3`);
+        nowBtn.setAttribute('data-page', 3)
+        nowBtn.innerHTML = 3
+    }
+    if (page == 2) {
+        let nowBtn = document.querySelector(`[data-page='${page}']`);
+        let nowBtnParent = nowBtn.closest('.page-item');
+        nowBtnParent.classList.add('active');
+    }
+    if (page != 2 && page != 1 && page != 'finish') {
+        let nowBtn = document.querySelector('.page-link.b2');
+        nowBtn.setAttribute('data-page', page)
+        nowBtn.innerHTML = page;
+        let nowBtnParent = nowBtn.closest('.page-item');
+        nowBtnParent.classList.add('active');
+        nowBtn = document.querySelector('.page-link.b1');
+        nowBtn.setAttribute('data-page', page - 1)
+        nowBtn.innerHTML = page - 1;
+        nowBtn = document.querySelector('.page-link.b3');
+        nowBtn.setAttribute('data-page', Number(page) + Number(1))
+        nowBtn.innerHTML = Number(page) + Number(1);
+    }
+    if (page == 'finish' || page == lastPage) {
+        let startBtn = document.querySelector('.page-item.finish');
+        startBtn.classList.add('disabled')
+        let nowBtn = document.querySelector('.page-link.b3');
+        let nowBtnParent = nowBtn.closest('.page-item');
+        nowBtnParent.classList.add('active');
+        nowBtn.setAttribute('data-page', lastPage)
+        nowBtn.innerHTML = lastPage;
+        nowBtn = document.querySelector('.page-link.b2');
+        nowBtn.setAttribute('data-page', lastPage - 1)
+        nowBtn.innerHTML = lastPage - 1;
+        nowBtn = document.querySelector('.page-link.b1');
+        nowBtn.setAttribute('data-page', lastPage - 2)
+        nowBtn.innerHTML = lastPage - 2;
+    }
+}
 
 function createListItemElement(place) {
     let element = document.querySelector('.nodeToCopy').cloneNode(true);
@@ -132,6 +162,7 @@ function createListItemElement(place) {
 
 
 function renderRecords(array) {
+    while (document.querySelector('.forDelete-list')) document.querySelector('.forDelete-list').remove();
     let placeList = document.querySelector('.place-list');
     if (placeList.querySelector('.noRecord')) placeList.querySelector('.noRecord').remove()
     while (placeList.querySelector('.forDelete')) placeList.querySelector('.forDelete').remove();
@@ -155,10 +186,13 @@ function pagination(page) {
 function createArray() {
     newArray = [];
     for (let i = 0; i < data.length; i++) {
-        if ((data[i].admArea == param[0] || param[0] == undefined)
-            && (data[i].district == param[1] || param[1] == undefined)
-            && (data[i].typeObject == param[2] || param[2] == undefined)
-            && (data[i].socialPrivileges == param[3] || param[3] == undefined)) {
+        if ((data[i].admArea == param[0] || param[0] == 'null')
+            && (data[i].district == param[1] || param[1] == 'null')
+            && (data[i].typeObject == param[2] || param[2] == 'null')
+            && (data[i].socialPrivileges == param[3] || param[3] == false)
+            && (`${data[i].name}`.includes(param[4]) || param[4] == "")
+            && (data[i].isNetObject == param[5] || param[5] == false)
+            ) {
             newArray.push(data[i])
         }
     }
@@ -210,4 +244,6 @@ window.onload = function () {
     document.querySelector('.pagination').onclick = pageBtnHandler;
     document.querySelector('.place-list').onclick = placeBtnHandler;
     document.querySelector('.delete-task-btn').onclick = deleteItem;
+    document.querySelector('.search-btn').onclick = searchBtnHandler;
+    
 }

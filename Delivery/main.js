@@ -4,7 +4,7 @@
 
 let json = null
 let data = null;
-let param = [undefined, undefined, undefined, undefined];
+let param = [undefined, undefined, undefined, undefined]; //[округ, район, тип, скидка]
 let newArray = [];
 let selectPlace = [];
 let totalPrice = [1, 0, 0] //[быстрая доставка, подарок, стоимость]
@@ -83,6 +83,7 @@ function countTotalPrice() {
     }
     totalPrice[2] *= totalPrice[0]
     document.querySelector('.totalPrice').innerHTML = `Итого: ${Math.round(totalPrice[2])} рублей`
+    document.querySelector('.modal-totalPrice').innerHTML = `Итого: ${Math.round(totalPrice[2])} рублей`
 }
 
 function updateDeliveryOptions(event) {
@@ -161,7 +162,7 @@ function updateModal() {
 function renderRecords(array) {
     let placeList = document.querySelector('.place-list');
     if (placeList.querySelector('.noRecord')) placeList.querySelector('.noRecord').remove()
-    while (placeList.querySelector('.forDelete')) placeList.querySelector('.forDelete').remove();
+    while (placeList.querySelector('.forDelete-list')) placeList.querySelector('.forDelete-list').remove();
     if (array.length == 0) {
         placeList.append(noRecords());
         return
@@ -198,9 +199,7 @@ function placeBtnHandler(event) {
     for (let i = 0; i < newArray.length; i++) {
         if (newArray[i].id == event.target.id) selectPlace = newArray[i]
     }
-    while (document.querySelector('.forDelete')) {
-        document.querySelector('.forDelete').remove()
-    }
+    while (document.querySelector('.forDelete')) document.querySelector('.forDelete').remove()
     renderMenu()
 }
 
@@ -314,6 +313,7 @@ function pagination(page) {
 function createListItemElement(place) {
     let element = document.querySelector('.nodeToCopy').cloneNode(true);
     element.classList.remove('d-none');
+    element.classList.add('forDelete-list')
     element.querySelector('.place-list-name').innerHTML = place.name;
     element.querySelector('.place-list-type').innerHTML = place.typeObject;;
     element.querySelector('.place-list-address').innerHTML = place.address;
