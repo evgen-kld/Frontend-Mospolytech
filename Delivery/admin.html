@@ -89,19 +89,23 @@
                 Количество мест
             </div>
             <div class="col-5">
-                от 
+                от
                 <input class="seat-from" type="number" min="0" value="0">
             </div>
             <div class="col-5">
-                до 
+                до
                 <input class="seat-to" type="number" min="0" value="0">
-            </div>           
+            </div>
         </div>
 
 
 
         <div class="d-grid">
             <button type="button" class="btn btn-primary btn-lg search-btn">Поиск</button>
+        </div>
+        <div class="d-grid">
+            <button data-bs-toggle="modal" data-bs-target="#create-task-modal" type="button"
+                class="btn btn-primary btn-lg mt-3">Добавить новую запись</button>
         </div>
     </div>
     <div class="container my-5 px-0">
@@ -183,6 +187,105 @@
         </div>
     </div>
 
+    <div class="modal fade" id="create-task-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-md-3 col-form-label">Название</label>
+                            <div class="col-md-9">
+                                <input type="text" id="name" class="form-control" value="Шашлычная">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="Net" class="col-md-3 col-form-label">Является сетевым</label>
+                            <div class="col-md-9">
+                                <label>
+                                    <input type="radio" name="isNet" id="optionsRadios1" value="1"
+                                        checked="">
+                                    Да
+                                </label>
+                                <label>
+                                    <input type="radio" name="isNet" id="optionsRadios2" value="0">
+                                    Нет
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-md-3 col-form-label">Вид объекта</label>
+                            <div class="col-md-9">
+                                <input type="text" id="type" class="form-control" value="кафе">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-md-3 col-form-label">Округ</label>
+                            <div class="col-md-9">
+                                <input type="text" id="area" class="form-control" value="Северный">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-md-3 col-form-label">Район</label>
+                            <div class="col-md-9">
+                                <input type="text" id="district" class="form-control" value="Центральный">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-md-3 col-form-label">Адрес</label>
+                            <div class="col-md-9">
+                                <input type="text" id="address" class="form-control" value="Иванова 2а">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-md-3 col-form-label">Число посадочных мест</label>
+                            <div class="col-md-9">
+                                <input type="text" id="numberOfGuest" class="form-control" value="100">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-md-3 col-form-label">Показатель социальных льгот</label>
+                            <div class="col-md-9">
+                                <label>
+                                    <input type="radio" name="social" value="1"
+                                        checked="">
+                                    Есть
+                                </label>
+                                <label>
+                                    <input type="radio" name="social" value="0">
+                                    Нет
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-md-3 col-form-label">Телефон</label>
+                            <div class="col-md-9">
+                                <input type="text" id="telefone" class="form-control" value="8888888">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="name" class="col-md-3 col-form-label">Координаты</label>
+                            <div class="col-md-4">
+                                <input type="text" id="koordX" class="form-control" value="123">
+                            </div>
+                            <div class="col-md-1"></div>
+                                <div class="col-md-4">
+                                <input type="text" id="koordY" class="form-control" value="123">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary create-btn"
+                        data-bs-dismiss="modal">Создать</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

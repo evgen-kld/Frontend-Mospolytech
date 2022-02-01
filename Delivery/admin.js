@@ -2,7 +2,6 @@
 
 // import {renderPageBtn} from './lib.js'
 
-console.log(`Кафе «ТЕАТР НА ЮГО-ЗАПАДЕ»`.includes('ТЕАТР'))
 let newArray = [];
 let activeTask = null;
 let data = null;
@@ -28,6 +27,29 @@ function deleteItem() {
     url.searchParams.set('api_key', 'cbd284a6-b7cd-422c-b305-f3b1a413d861');
     let xhr = new XMLHttpRequest();
     xhr.open('DELETE', url);
+    xhr.responseType = 'json';
+    xhr.onload = function () {
+        console.log(this.response)
+    }
+    xhr.send();
+}
+
+function createBtn() {
+    let url = new URL('http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants')
+    url.searchParams.set('api_key', 'cbd284a6-b7cd-422c-b305-f3b1a413d861');
+    url.searchParams.set('field1', document.getElementById('name').value);
+    url.searchParams.set('field2', document.querySelector('input[name="isNet"]:checked').value);
+    url.searchParams.set('field3', document.getElementById('type').value);
+    url.searchParams.set('field4', document.getElementById('area').value);
+    url.searchParams.set('field5', document.getElementById('district').value);
+    url.searchParams.set('field6', document.getElementById('address').value);
+    url.searchParams.set('field7', document.getElementById('numberOfGuest').value);
+    url.searchParams.set('field8', document.querySelector('input[name="social"]:checked').value);
+    url.searchParams.set('field9', document.getElementById('telefone').value);
+    url.searchParams.set('field10', document.getElementById('koordX').value);
+    url.searchParams.set('field11', document.getElementById('koordY').value);
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
     xhr.responseType = 'json';
     xhr.onload = function () {
         console.log(this.response)
@@ -245,5 +267,6 @@ window.onload = function () {
     document.querySelector('.place-list').onclick = placeBtnHandler;
     document.querySelector('.delete-task-btn').onclick = deleteItem;
     document.querySelector('.search-btn').onclick = searchBtnHandler;
+    document.querySelector('.create-btn').onclick = createBtn;
     
 }
