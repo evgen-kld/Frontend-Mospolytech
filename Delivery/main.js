@@ -1,6 +1,6 @@
 'use strict'
 
-import {noRecords} from './lib.js'
+import {noRecords, showAlert, renderPageBtn} from './lib.js'
 
 let json = null;
 let data = null;
@@ -115,6 +115,7 @@ function renderRecords(array) {
     while (placeList.querySelector('.forDelete-list')) placeList.querySelector('.forDelete-list').remove();
     if (array.length == 0) {
         placeList.append(noRecords());
+        showAlert('Записей нет!')
         return;
     }
     for (let i = 0; i < array.length; i++) {
@@ -172,7 +173,7 @@ function searchBtnHandler() {
     if (district == 'null') district = undefined;
     if (type == 'null') type = undefined;
     param = [area, district, type, sale];
-    createArray();
+    filterArray();
 }
 
 function pageBtnHandler(event) {
@@ -181,80 +182,12 @@ function pageBtnHandler(event) {
     }
 }
 
-function renderPageBtn(page) {
-    let lastPage = newArray.length / 10;
-    if (document.querySelector('.pagination.d-none')) document.querySelector('.pagination.d-none').classList.remove('d-none');
-    let activeBtn = document.querySelector('.page-item.active');
-    activeBtn.classList.remove('active');
-    let firstBtn = document.querySelector('.page-item.start');
-    if (page != 1 && firstBtn.classList.contains("disabled")) {
-        firstBtn.classList.remove('disabled');
-    }
-    let finishBtn = document.querySelector('.page-item.finish');
-    if (page != lastPage && finishBtn.classList.contains("disabled")) {
-        finishBtn.classList.remove('disabled');
-    }
-    if (lastPage == 1 || lastPage == 0) {
-        let btn = document.querySelector('.pagination');
-        btn.classList.add('d-none');
-        return;
-    }
-    if (page == 1 || page == 'start') {
-        let startBtn = document.querySelector('.page-item.start');
-        startBtn.classList.add('disabled');
-        let nowBtn = document.querySelector(`.page-link.b1`);
-        nowBtn.setAttribute('data-page', 1);
-        nowBtn.innerHTML = 1;
-        let nowBtnParent = nowBtn.closest('.page-item');
-        nowBtnParent.classList.add('active');
-        nowBtn = document.querySelector(`.page-link.b2`);
-        nowBtn.setAttribute('data-page', 2);
-        nowBtn.innerHTML = 2;
-        nowBtn = document.querySelector(`.page-link.b3`);
-        nowBtn.setAttribute('data-page', 3);
-        nowBtn.innerHTML = 3;
-    }
-    if (page == 2) {
-        let nowBtn = document.querySelector(`[data-page='${page}']`);
-        let nowBtnParent = nowBtn.closest('.page-item');
-        nowBtnParent.classList.add('active');
-    }
-    if (page != 2 && page != 1 && page != 'finish') {
-        let nowBtn = document.querySelector('.page-link.b2');
-        nowBtn.setAttribute('data-page', page);
-        nowBtn.innerHTML = page;
-        let nowBtnParent = nowBtn.closest('.page-item');
-        nowBtnParent.classList.add('active');
-        nowBtn = document.querySelector('.page-link.b1');
-        nowBtn.setAttribute('data-page', page - 1);
-        nowBtn.innerHTML = page - 1;
-        nowBtn = document.querySelector('.page-link.b3');
-        nowBtn.setAttribute('data-page', Number(page) + Number(1));
-        nowBtn.innerHTML = Number(page) + Number(1);
-    }
-    if (page == 'finish' || page == lastPage) {
-        let startBtn = document.querySelector('.page-item.finish');
-        startBtn.classList.add('disabled');
-        let nowBtn = document.querySelector('.page-link.b3');
-        let nowBtnParent = nowBtn.closest('.page-item');
-        nowBtnParent.classList.add('active');
-        nowBtn.setAttribute('data-page', lastPage);
-        nowBtn.innerHTML = lastPage;
-        nowBtn = document.querySelector('.page-link.b2');
-        nowBtn.setAttribute('data-page', lastPage - 1);
-        nowBtn.innerHTML = lastPage - 1;
-        nowBtn = document.querySelector('.page-link.b1');
-        nowBtn.setAttribute('data-page', lastPage - 2);
-        nowBtn.innerHTML = lastPage - 2;
-    }
-}
-
 function pagination(page) {
     if (page == 'start') page = 1;
-    if (page == 'finish') page == newArray.length / 10;
+    if (page == 'finish') page = newArray.length / 10;
     let arr = newArray.slice((page - 1) * 10, (page - 1) * 10 + 10);
     renderRecords(arr);
-    renderPageBtn(page);
+    renderPageBtn(page, newArray);
 }
 
 function createListItemElement(place) {
@@ -272,7 +205,7 @@ function createListItemElement(place) {
 }
 
 
-function createArray() {
+function filterArray() {
     newArray = [];
     for (let i = 0; i < data.length; i++) {
         if ((data[i].admArea == param[0] || param[0] == undefined)
@@ -319,7 +252,7 @@ function downloadData() {
         data = this.response;
         data = getSortedArray(data);
         createSearch();
-        createArray();
+        filterArray();
     }
     xhr.send();
     let address = './static/menu.json'
