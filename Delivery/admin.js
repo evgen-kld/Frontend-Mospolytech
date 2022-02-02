@@ -1,10 +1,12 @@
 'use strict'
 
-// import {renderPageBtn} from './lib.js'
+import {noRecords} from './lib.js'
 
 let newArray = [];
 let activeTask = null;
 let data = null;
+let urlAddress = 'http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants';
+let apiKey = 'cbd284a6-b7cd-422c-b305-f3b1a413d861';
 let param = ['null', 'null', 'null', false, "", false, "", "", 0, 0]; 
 //[округ, район, тип, скидка, название, сетевой, мест с, мест по, дата с, дата по]
 
@@ -23,20 +25,20 @@ function searchBtnHandler() {
 }
 
 function deleteItem() {
-    let url = new URL('http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants/' + activeTask)
-    url.searchParams.set('api_key', 'cbd284a6-b7cd-422c-b305-f3b1a413d861');
+    let url = new URL(urlAddress + activeTask);
+    url.searchParams.set('api_key', apiKey);
     let xhr = new XMLHttpRequest();
     xhr.open('DELETE', url);
     xhr.responseType = 'json';
     xhr.onload = function () {
-        console.log(this.response)
+        console.log(this.response);
     }
     xhr.send();
 }
 
 function createBtn() {
-    let url = new URL('http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants')
-    url.searchParams.set('api_key', 'cbd284a6-b7cd-422c-b305-f3b1a413d861');
+    let url = new URL(urlAddress)
+    url.searchParams.set('api_key', apiKey);
     url.searchParams.set('field1', document.getElementById('name').value);
     url.searchParams.set('field2', document.querySelector('input[name="isNet"]:checked').value);
     url.searchParams.set('field3', document.getElementById('type').value);
@@ -58,30 +60,27 @@ function createBtn() {
 }
 
 function showItemModal(selectPlace) {
-
 }
 
 function editItemModal(selectPlace) {
-
 }
 
 function removeItemModal(selectPlace) {
-    document.querySelector('.task-name').innerHTML = selectPlace.name
+    document.querySelector('.task-name').innerHTML = selectPlace.name;
 }
 
-
 function placeBtnHandler(event) {
-    if (event.target.classList[0] != 'fas') return
-    activeTask = event.target.dataset.id
-    let selectPlace = null
+    if (event.target.classList[0] != 'fas') return;
+    activeTask = event.target.dataset.id;
+    let selectPlace = null;
     for (let i = 0; i < data.length; i++) {
         if (data[i].id == activeTask) {
-            selectPlace = data[i]
+            selectPlace = data[i];
         }
     }
-    if (event.target.classList[1] == 'show') showItemModal(selectPlace)
-    if (event.target.classList[1] == 'edit') editItemModal(selectPlace)
-    if (event.target.classList[1] == 'remove') removeItemModal(selectPlace)
+    if (event.target.classList[1] == 'show') showItemModal(selectPlace);
+    if (event.target.classList[1] == 'edit') editItemModal(selectPlace);
+    if (event.target.classList[1] == 'remove') removeItemModal(selectPlace);
 }
 
 function pageBtnHandler(event) {
@@ -90,47 +89,38 @@ function pageBtnHandler(event) {
     }
 }
 
-function noRecords() {
-    let element = document.createElement('div');
-    element.classList.add('d-flex', 'justify-content-center', 'noRecord');
-    let textElem = document.createElement('h3');
-    textElem.innerHTML = 'Записей нет!';
-    element.append(textElem);
-    return element;
-}
-
 function renderPageBtn(page) {
     let lastPage = newArray.length / 10
-    if (document.querySelector('.pagination.d-none')) document.querySelector('.pagination.d-none').classList.remove('d-none')
+    if (document.querySelector('.pagination.d-none')) document.querySelector('.pagination.d-none').classList.remove('d-none');
     let activeBtn = document.querySelector('.page-item.active');
-    activeBtn.classList.remove('active')
+    activeBtn.classList.remove('active');
     let firstBtn = document.querySelector('.page-item.start');
     if (page != 1 && firstBtn.classList.contains("disabled")) {
-        firstBtn.classList.remove('disabled')
+        firstBtn.classList.remove('disabled');
     }
     let finishBtn = document.querySelector('.page-item.finish');
     if (page != lastPage && finishBtn.classList.contains("disabled")) {
-        finishBtn.classList.remove('disabled')
+        finishBtn.classList.remove('disabled');
     }
     if (lastPage == 1 || lastPage == 0) {
         let btn = document.querySelector('.pagination');
-        btn.classList.add('d-none')
-        return
+        btn.classList.add('d-none');
+        return;
     }
     if (page == 1 || page == 'start') {
         let startBtn = document.querySelector('.page-item.start');
-        startBtn.classList.add('disabled')
+        startBtn.classList.add('disabled');
         let nowBtn = document.querySelector(`.page-link.b1`);
-        nowBtn.setAttribute('data-page', 1)
-        nowBtn.innerHTML = 1
+        nowBtn.setAttribute('data-page', 1);
+        nowBtn.innerHTML = 1;
         let nowBtnParent = nowBtn.closest('.page-item');
         nowBtnParent.classList.add('active');
         nowBtn = document.querySelector(`.page-link.b2`);
-        nowBtn.setAttribute('data-page', 2)
-        nowBtn.innerHTML = 2
+        nowBtn.setAttribute('data-page', 2);
+        nowBtn.innerHTML = 2;
         nowBtn = document.querySelector(`.page-link.b3`);
         nowBtn.setAttribute('data-page', 3)
-        nowBtn.innerHTML = 3
+        nowBtn.innerHTML = 3;
     }
     if (page == 2) {
         let nowBtn = document.querySelector(`[data-page='${page}']`);
@@ -139,30 +129,30 @@ function renderPageBtn(page) {
     }
     if (page != 2 && page != 1 && page != 'finish') {
         let nowBtn = document.querySelector('.page-link.b2');
-        nowBtn.setAttribute('data-page', page)
+        nowBtn.setAttribute('data-page', page);
         nowBtn.innerHTML = page;
         let nowBtnParent = nowBtn.closest('.page-item');
         nowBtnParent.classList.add('active');
         nowBtn = document.querySelector('.page-link.b1');
-        nowBtn.setAttribute('data-page', page - 1)
+        nowBtn.setAttribute('data-page', page - 1);
         nowBtn.innerHTML = page - 1;
         nowBtn = document.querySelector('.page-link.b3');
-        nowBtn.setAttribute('data-page', Number(page) + Number(1))
+        nowBtn.setAttribute('data-page', Number(page) + Number(1));
         nowBtn.innerHTML = Number(page) + Number(1);
     }
     if (page == 'finish' || page == lastPage) {
         let startBtn = document.querySelector('.page-item.finish');
-        startBtn.classList.add('disabled')
+        startBtn.classList.add('disabled');
         let nowBtn = document.querySelector('.page-link.b3');
         let nowBtnParent = nowBtn.closest('.page-item');
         nowBtnParent.classList.add('active');
-        nowBtn.setAttribute('data-page', lastPage)
+        nowBtn.setAttribute('data-page', lastPage);
         nowBtn.innerHTML = lastPage;
         nowBtn = document.querySelector('.page-link.b2');
-        nowBtn.setAttribute('data-page', lastPage - 1)
+        nowBtn.setAttribute('data-page', lastPage - 1);
         nowBtn.innerHTML = lastPage - 1;
         nowBtn = document.querySelector('.page-link.b1');
-        nowBtn.setAttribute('data-page', lastPage - 2)
+        nowBtn.setAttribute('data-page', lastPage - 2);
         nowBtn.innerHTML = lastPage - 2;
     }
 }
@@ -182,7 +172,6 @@ function createListItemElement(place) {
     return element;
 }
 
-
 function renderRecords(array) {
     while (document.querySelector('.forDelete-list')) document.querySelector('.forDelete-list').remove();
     let placeList = document.querySelector('.place-list');
@@ -190,7 +179,7 @@ function renderRecords(array) {
     while (placeList.querySelector('.forDelete')) placeList.querySelector('.forDelete').remove();
     if (array.length == 0) {
         placeList.append(noRecords());
-        return
+        return;
     }
     for (let i = 0; i < array.length; i++) {
         placeList.append(createListItemElement(array[i]));
@@ -198,11 +187,11 @@ function renderRecords(array) {
 }
 
 function pagination(page) {
-    if (page == 'start') page = 1
-    if (page == 'finish') page == newArray.length / 10
-    let arr = newArray.slice((page - 1) * 10, (page - 1) * 10 + 10)
-    renderRecords(arr)
-    renderPageBtn(page, newArray)
+    if (page == 'start') page = 1;
+    if (page == 'finish') page == newArray.length / 10;
+    let arr = newArray.slice((page - 1) * 10, (page - 1) * 10 + 10);
+    renderRecords(arr);
+    renderPageBtn(page, newArray);
 }
 
 function createArray() {
@@ -215,23 +204,21 @@ function createArray() {
             && (`${data[i].name}`.includes(param[4]) || param[4] == "")
             && (data[i].isNetObject == param[5] || param[5] == false)
             ) {
-            newArray.push(data[i])
+            newArray.push(data[i]);
         }
     }
     pagination(1);
 }
-
 
 function createSelect(array, name) {
     let arrayElement = document.querySelector(name);
     for (let i = 0; i < array.length; i++) {
         let text = document.createElement('option');
         text.innerHTML = array[i];
-        text.setAttribute('value', array[i])
+        text.setAttribute('value', array[i]);
         arrayElement.append(text);
     }
 }
-
 
 function createSearch() {
     let area = new Set();
@@ -239,8 +226,8 @@ function createSearch() {
     let type = new Set();
     for (let i = 0; i < data.length; i++) {
         area.add(data[i].admArea);
-        district.add(data[i].district)
-        type.add(data[i].typeObject)
+        district.add(data[i].district);
+        type.add(data[i].typeObject);
     }
     createSelect(Array.from(area), '.area');
     createSelect(Array.from(district), '.district');
@@ -248,13 +235,13 @@ function createSearch() {
 }
 
 function downloadData() {
-    let url = new URL('http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants')
-    url.searchParams.set('api_key', 'cbd284a6-b7cd-422c-b305-f3b1a413d861');
+    let url = new URL(urlAddress)
+    url.searchParams.set('api_key', apiKey);
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url);
     xhr.responseType = 'json';
     xhr.onload = function () {
-        data = this.response
+        data = this.response;
         createSearch();
         createArray();
     }

@@ -15,6 +15,12 @@
 
 <body>
     <div class="container">
+        <div class="alerts my-3">
+            <div class="alert alert-danger alert-dismissible fade show alert-template d-none" role="alert">
+                <span class="msg d-flex justify-content-center h2"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                 <img src="static/img/knife-fork.png" height="40" width="40">
@@ -44,32 +50,32 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row">
-                            <div class="col-1"></div>
-                            <img class="col-4" src="static/img/salad.png" width="200" height="200">
-                            <div class="col-6 d-flex align-items-center justify-content-center">
+                            <div class="col-md-1"></div>
+                            <img class="col-md-4" src="static/img/salad.png" width="200" height="200">
+                            <div class="col-md-6 d-flex align-items-center justify-content-center">
                                 <h1>Только свежие продукты</h1>
                             </div>
-                            <div class="col-1"></div>
+                            <div class="col-md-1"></div>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="row">
-                            <div class="col-1"></div>
-                            <img class="col-4" src="static/img/delivery.png" width="200" height="200">
-                            <div class="col-6 d-flex align-items-center justify-content-center">
+                            <div class="col-md-1"></div>
+                            <img class="col-md-4" src="static/img/delivery.png" width="200" height="200">
+                            <div class="col-md-6 d-flex align-items-center justify-content-center">
                                 <h1>Самая быстрая доставка</h1>
                             </div>
-                            <div class="col-1"></div>
+                            <div class="col-md-1"></div>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="row">
-                            <div class="col-1"></div>
-                            <img class="col-4" src="static/img/sale.png" width="200" height="200">
-                            <div class="col-6 d-flex align-items-center justify-content-center">
+                            <div class="col-md-1"></div>
+                            <img class="col-md-4" src="static/img/sale.png" width="200" height="200">
+                            <div class="col-md-6 d-flex align-items-center justify-content-center">
                                 <h1>Постоянные скидки</h1>
                             </div>
-                            <div class="col-1"></div>
+                            <div class="col-md-1"></div>
                         </div>
                     </div>
                 </div>
@@ -111,24 +117,24 @@
         </div>
         <div class="container my-5">
             <div class="row mb-3">
-                <div class="col-6">
+                <div class="col-md-6">
                     <select class="form-select area">
                         <option value="null">Округ</option>
                     </select>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6">
                     <select class="form-select district">
                         <option value="null">Район</option>
                     </select>
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-6">
+                <div class="col-md-6">
                     <select class="form-select type col-6">
                         <option value="null">Вид</option>
                     </select>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6">
                     <div class="form-check col-6">
                         <input class="form-check-input sale" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
@@ -144,39 +150,39 @@
         <div class="container my-5 px-0">
             <span>
                 <div class="row">
-                    <div class="col-3 d-flex justify-content-center">
+                    <div class="col-md-3 d-flex justify-content-center">
                         <h3>Название</h3>
                     </div>
-                    <div class="col-2 d-flex justify-content-center">
+                    <div class="col-md-2 d-flex justify-content-center">
                         <h3>Тип</h3>
                     </div>
-                    <div class="col-4 d-flex justify-content-center">
+                    <div class="col-md-4 d-flex justify-content-center">
                         <h3>Адрес</h3>
                     </div>
-                    <div class="col-1 d-flex justify-content-center">
+                    <div class="col-md-1 d-flex justify-content-center">
                         <h3>Скидка</h3>
                     </div>
-                    <div class="col-2"></div>
+                    <div class="col-md-2"></div>
                 </div>
             </span>
 
             <div class="place-list">
                 <div class="row my-3 d-none nodeToCopy">
-                    <div class="col-3 d-flex justify-content-center">
+                    <div class="col-md-3 d-flex justify-content-center">
                         <h5 class="place-list-name"></h5>
                     </div>
-                    <div class="col-2 d-flex justify-content-center">
+                    <div class="col-md-2 d-flex justify-content-center">
                         <h5 class="place-list-type"></h5>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-4">
                         <h5 class="place-list-address"></h5>
                         <h5 class="place-list-area"></h5>
                         <h5 class="place-list-district"></h5>
                     </div>
-                    <div class="col-1 d-flex justify-content-center">
+                    <div class="col-md-1 d-flex justify-content-center">
                         <h5 class="place-list-sale">+</h5>
                     </div>
-                    <div class="col-2 d-flex justify-content-center">
+                    <div class="col-md-2 d-flex justify-content-center">
                         <button type="button" class="btn btn-success place-list-btn btn-lg">Выбрать</button>
                     </div>
                 </div>
@@ -202,18 +208,18 @@
             <div class="row d-flex justify-content-center">
                 <div class="my-2 p-4 forCopy d-none">
                     <div class="row d-flex justify-content-center align-items-center bg-white rounded-3">
-                        <div class="col-2">
+                        <div class="col-md-2">
                             <img class="img-fluid menu-img">
                         </div>
-                        <div class="col-7 align-self-start">
+                        <div class="col-md-7 align-self-start">
                             <p class="display-3 menu-name"></p>
                             <p class="fs-6 fw-light menu-description"></p>
                         </div>
-                        <div class="col-2 align-self-start">
+                        <div class="col-md-2 align-self-start">
                             <h1 class="display-3 text-center">Цена</h1>
                             <p class="fw-bold fs-1 text-center menu-price"></p>
                         </div>
-                        <div class="col-1 d-flex">
+                        <div class="col-md-1 d-flex">
                             <input class="input-group form-control form-control-lg" type="number" min="0" value="0">
                         </div>
                     </div>
@@ -223,22 +229,22 @@
                 <h1 class="display-1">Заказ</h1>
             </div>
             <div class="row">
-                <div class="form-check form-switch col-6 d-flex justify-content-center">
+                <div class="form-check form-switch col-md-6 d-flex justify-content-center">
                     <input class="form-check-input" type="checkbox" id="getQuickDelivery">
                     <label class="form-check-label"> Быстрая доставка</label>
                 </div>
-                <div class="form-check form-switch col-6 d-flex justify-content-center">
+                <div class="form-check form-switch col-md-6 d-flex justify-content-center">
                     <input class="form-check-input" type="checkbox" id="getPresent">
                     <label class="form-check-label"> Получить подарок</label>
                 </div>
             </div>
-            <div class="row border border-dark">
-                <div class="col-6 d-flex justify-content-center">
+            <div class="row">
+                <div class="col-md-6 d-flex justify-content-center">
                     <div class="totalPrice h3">
                         Итого: 0 рублей
                     </div>
                 </div>
-                <div class="col-6 d-flex justify-content-center">
+                <div class="col-md-6 d-flex justify-content-center">
                     <button data-bs-toggle="modal" data-bs-target="#count-modal" class="btn btn-info">Информация о
                         заказе</button>
                 </div>
