@@ -39,24 +39,26 @@ function deleteItem() {
 function createBtn() {
     let url = new URL(urlAddress)
     url.searchParams.set('api_key', apiKey);
-    url.searchParams.set('field1', document.getElementById('name').value);
-    url.searchParams.set('field2', document.querySelector('input[name="isNet"]:checked').value);
-    url.searchParams.set('field3', document.getElementById('type').value);
-    url.searchParams.set('field4', document.getElementById('area').value);
-    url.searchParams.set('field5', document.getElementById('district').value);
-    url.searchParams.set('field6', document.getElementById('address').value);
-    url.searchParams.set('field7', document.getElementById('numberOfGuest').value);
-    url.searchParams.set('field8', document.querySelector('input[name="social"]:checked').value);
-    url.searchParams.set('field9', document.getElementById('telefone').value);
-    url.searchParams.set('field10', document.getElementById('koordX').value);
-    url.searchParams.set('field11', document.getElementById('koordY').value);
+    let formData = new FormData();
+    formData.append('name', document.getElementById('name').value);
+    // formData.append('isNetObject', document.querySelector('input[name="isNet"]:checked').value);
+    formData.append('operatingCompany', 'aaa');
+    formData.append('typeObject', document.getElementById('type').value);
+    formData.append('admArea ', document.getElementById('area').value);
+    formData.append('district', document.getElementById('district').value);
+    formData.append('address', document.getElementById('address').value);
+    formData.append('publicPhone', document.getElementById('phoneNumber').value);
+    formData.append('rate', 11111);
+    formData.append('seatsCount ', document.getElementById('numberOfGuest').value);
+    formData.append('socialDiscount', 50);
+    // formData.append('socialPrivileges', document.querySelector('input[name="social"]:checked').value);
     let xhr = new XMLHttpRequest();
     xhr.open('POST', url);
     xhr.responseType = 'json';
     xhr.onload = function () {
         showAlert(Object.values(this.response));
     }
-    xhr.send();
+    xhr.send(formData);
 }
 
 function showItemModal(selectPlace) {
