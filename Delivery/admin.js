@@ -38,8 +38,15 @@ function editSend() {
     xhr.open('PUT', url);
     xhr.responseType = 'json';
     xhr.onload = function () {
-        showAlert(Object.values(this.response));
+        if (this.status == 200) {
+            showAlert('Запись успешно обновлена!');
+        }
+        else {
+            showAlert(Object.values(this.response));
+        }
         downloadData();
+        document.querySelector('.name').value = document.getElementById('name').value;
+        document.querySelector('.search-btn').onclick();
     }
     xhr.send(formData);
 }
@@ -62,8 +69,15 @@ function createSend() {
     xhr.open('POST', url);
     xhr.responseType = 'json';
     xhr.onload = function () {
-        showAlert(Object.values(this.response));
+        if (this.status == 200) {
+            showAlert('Запись успешно создана!');
+        }
+        else {
+            showAlert(Object.values(this.response));
+        }
         downloadData();
+        document.querySelector('.name').value = document.getElementById('name').value;
+        document.querySelector('.search-btn').onclick();
     }
     xhr.send(formData);
 }
@@ -165,8 +179,14 @@ function deleteItem() {
     xhr.open('DELETE', url);
     xhr.responseType = 'json';
     xhr.onload = function () {
-        showAlert(Object.values(this.response));
+        if (this.status == 200) {
+            showAlert(`Запись №${Object.values(this.response)} успешно удалена!`);
+        }
+        else {
+            showAlert(Object.values(this.response));
+        }
         downloadData();
+        document.querySelector('.search-btn').onclick();
     }
     xhr.send();
 }
@@ -184,8 +204,6 @@ function placeBtnHandler(event) {
             selectPlace = data[i];
         }
     }
-    if (event.target.classList[1] == 'show') showItemModal(selectPlace);
-    if (event.target.classList[1] == 'edit') editItemModal(selectPlace);
     if (event.target.classList[1] == 'remove') removeItemModal(selectPlace);
 }
 
@@ -217,7 +235,6 @@ function renderRecords(array) {
     while (placeList.querySelector('.forDelete')) placeList.querySelector('.forDelete').remove();
     if (array.length == 0) {
         placeList.append(noRecords());
-        showAlert('Записей нет!')
         return;
     }
     for (let i = 0; i < array.length; i++) {
@@ -290,6 +307,7 @@ function downloadData() {
 window.onload = function () {
     downloadData()
     document.querySelector('.pagination').onclick = pageBtnHandler;
+    document.querySelector('.place-list').onclick = placeBtnHandler;
     document.querySelector('.delete-task-btn').onclick = deleteItem;
     document.querySelector('.search-btn').onclick = searchBtnHandler;
     document.getElementById('update-modal').addEventListener('show.bs.modal', prepareModalContent);

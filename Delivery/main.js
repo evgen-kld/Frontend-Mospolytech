@@ -138,6 +138,7 @@ function renderMenu() {
         elem.querySelector('.menu-img').setAttribute('src', json[`set${i}`][2]);
         elem.querySelector('.input-group').classList.add(`numberOfSets-${i - 1}`);
         elem.querySelector('.input-group').setAttribute('data-number', i);
+        elem.querySelector('.input-group').value = setArray[i]
         elem.querySelector('.menu-price').innerHTML = selectPlace[`set_${i}`] + ' р.';
         document.querySelector('.options').before(elem);
     }
@@ -151,6 +152,7 @@ function placeBtnHandler(event) {
     }
     while (document.querySelector('.forDelete')) document.querySelector('.forDelete').remove();
     renderMenu();
+    countTotalPrice();
 }
 
 function getSortedArray(array) {
