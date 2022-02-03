@@ -2,13 +2,147 @@
 
 import {noRecords, showAlert, renderPageBtn} from './lib.js'
 
+let action = [];
+let titles = {
+    'create': 'Создание новой записи',
+    'show': 'Просмотр записи',
+    'edit': 'Редактирование записи'
+};
+let actionBtnText = {
+    'create': 'Создать',
+    'show': 'Ок',
+    'edit': 'Обновить'
+};
 let newArray = [];
 let activeTask = null;
 let data = null;
 let urlAddress = 'http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants';
 let apiKey = 'cbd284a6-b7cd-422c-b305-f3b1a413d861';
+let selectPlace = null;
 let param = ['null', 'null', 'null', false, "", false, "", "", 0, 0]; 
 //[округ, район, тип, скидка, название, сетевой, мест с, мест по, дата с, дата по]
+
+function editSend() {
+    let url = new URL(urlAddress + '/' + activeTask)
+    url.searchParams.set('api_key', apiKey);
+    let formData = new FormData();
+    console.log(selectPlace)
+    if (selectPlace['name'] != document.getElementById('name').value) formData.append('name', document.getElementById('name').value);
+    if (selectPlace['typeObject'] != document.getElementById('type').value) formData.append('typeObject', document.getElementById('type').value);
+    if (selectPlace['admArea'] != document.getElementById('area').value) formData.append('admArea', document.getElementById('area').value);
+    if (selectPlace['district'] != document.getElementById('district').value) formData.append('district', document.getElementById('district').value);
+    if (selectPlace['address'] != document.getElementById('address').value) formData.append('address', document.getElementById('address').value);
+    if (selectPlace['seatsCount'] != document.getElementById('numberOfGuest').value) formData.append('seatsCount', document.getElementById('numberOfGuest').value);
+    if (selectPlace['publicPhone'] != document.getElementById('phoneNumber').value) formData.append('publicPhone', document.getElementById('phoneNumber').value);
+    let xhr = new XMLHttpRequest();
+    xhr.open('PUT', url);
+    xhr.responseType = 'json';
+    xhr.onload = function () {
+        showAlert(Object.values(this.response));
+        downloadData();
+    }
+    xhr.send(formData);
+}
+
+function createSend() {
+    let url = new URL(urlAddress)
+    url.searchParams.set('api_key', apiKey);
+    let formData = new FormData();
+    formData.append('name', document.getElementById('name').value);
+    // formData.append('isNetObject', document.querySelector('input[name="isNet"]:checked').value); сервер не работает с этим параметром
+    // console.log(document.querySelector('input[name="isNet"]:checked').value)
+    formData.append('typeObject', document.getElementById('type').value);
+    formData.append('admArea ', document.getElementById('area').value);
+    formData.append('district', document.getElementById('district').value);
+    formData.append('address', document.getElementById('address').value);
+    formData.append('seatsCount', document.getElementById('numberOfGuest').value);
+    // formData.append('socialPrivileges', document.querySelector('input[name="social"]:checked').value);
+    formData.append('publicPhone', document.getElementById('phoneNumber').value);
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    xhr.responseType = 'json';
+    xhr.onload = function () {
+        showAlert(Object.values(this.response));
+        downloadData();
+    }
+    xhr.send(formData);
+}
+
+function actionBtnHandler() {
+    if (action == 'show') return
+    if (action == 'create') {
+        createSend();
+    }
+    if (action == 'edit') {
+        editSend();
+    }
+}
+
+function resetForm(form) {
+    form.reset();
+    form.elements['name'].classList.remove('form-control-plaintext');
+    form.elements['isNet1'].disabled = false;
+    form.elements['isNet1'].removeAttribute('checked', '')
+    form.elements['isNet2'].disabled = false;
+    form.elements['isNet2'].removeAttribute('checked', '')
+    form.elements['type'].classList.remove('form-control-plaintext');
+    form.elements['area'].classList.remove('form-control-plaintext');
+    form.elements['district'].classList.remove('form-control-plaintext');
+    form.elements['address'].classList.remove('form-control-plaintext');
+    form.elements['numberOfGuest'].classList.remove('form-control-plaintext');
+    form.elements['social1'].disabled = false;
+    form.elements['social1'].removeAttribute('checked', '')
+    form.elements['social2'].disabled = false;
+    form.elements['social2'].removeAttribute('checked', '')
+    form.elements['phoneNumber'].classList.remove('form-control-plaintext');
+}
+
+function prepareModalContent(event) {
+    let form = event.target.querySelector('form');
+    resetForm(form);
+    action = event.relatedTarget.dataset.action;
+    event.target.querySelector('.modal-title').innerHTML = titles[action];
+    event.target.querySelector('.action-btn').innerHTML = actionBtnText[action];
+    if (action == 'edit' || action == 'show') {
+        activeTask = event.relatedTarget.firstElementChild.dataset.id;
+        for (let i = 0; i < newArray.length; i++) {
+            if (newArray[i].id == activeTask) selectPlace = newArray[i]; //не стал делать скрытый параметр, а повесил номер на id каждой кнопки 
+        }
+        form.elements['name'].value = selectPlace['name'];
+        if (selectPlace['isNetObject']) {
+            form.elements['isNet1'].setAttribute('checked', '');
+        }
+        else {
+            form.elements['isNet2'].setAttribute('checked', '');
+        }
+        form.elements['type'].value = selectPlace['typeObject'];
+        form.elements['area'].value = selectPlace['admArea'];
+        form.elements['district'].value = selectPlace['district'];
+        form.elements['address'].value = selectPlace['address'];
+        form.elements['numberOfGuest'].value = selectPlace['seatsCount'];
+        if (selectPlace['socialPriveleges']) {
+            form.elements['social1'].setAttribute('checked', '');
+        }
+        else {
+            form.elements['social1'].setAttribute('checked', '');
+        }
+        form.elements['phoneNumber'].value = selectPlace['publicPhone'];
+    }
+
+    if (action == 'show') {
+        form.elements['name'].classList.add('form-control-plaintext');
+        form.elements['isNet1'].disabled = true
+        form.elements['isNet2'].disabled = true
+        form.elements['type'].classList.add('form-control-plaintext');
+        form.elements['area'].classList.add('form-control-plaintext');
+        form.elements['district'].classList.add('form-control-plaintext');
+        form.elements['address'].classList.add('form-control-plaintext');
+        form.elements['numberOfGuest'].classList.add('form-control-plaintext');
+        form.elements['social1'].disabled = true
+        form.elements['social2'].disabled = true
+        form.elements['phoneNumber'].classList.add('form-control-plaintext');
+    }
+}
 
 function searchBtnHandler() {
     param[0] = document.querySelector('.area').value;
@@ -32,39 +166,9 @@ function deleteItem() {
     xhr.responseType = 'json';
     xhr.onload = function () {
         showAlert(Object.values(this.response));
+        downloadData();
     }
     xhr.send();
-}
-
-function createBtn() {
-    let url = new URL(urlAddress)
-    url.searchParams.set('api_key', apiKey);
-    let formData = new FormData();
-    formData.append('name', document.getElementById('name').value);
-    // formData.append('isNetObject', document.querySelector('input[name="isNet"]:checked').value);
-    formData.append('operatingCompany', 'aaa');
-    formData.append('typeObject', document.getElementById('type').value);
-    formData.append('admArea ', document.getElementById('area').value);
-    formData.append('district', document.getElementById('district').value);
-    formData.append('address', document.getElementById('address').value);
-    formData.append('publicPhone', document.getElementById('phoneNumber').value);
-    formData.append('rate', 11111);
-    formData.append('seatsCount ', document.getElementById('numberOfGuest').value);
-    formData.append('socialDiscount', 50);
-    // formData.append('socialPrivileges', document.querySelector('input[name="social"]:checked').value);
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', url);
-    xhr.responseType = 'json';
-    xhr.onload = function () {
-        showAlert(Object.values(this.response));
-    }
-    xhr.send(formData);
-}
-
-function showItemModal(selectPlace) {
-}
-
-function editItemModal(selectPlace) {
 }
 
 function removeItemModal(selectPlace) {
@@ -102,7 +206,7 @@ function createListItemElement(place) {
     element.querySelector('.place-list-district').innerHTML = place.district;
     element.querySelector('.btn-show').setAttribute('data-id', place.id);
     element.querySelector('.btn-edit').setAttribute('data-id', place.id);
-    element.querySelector('.btn-remove').setAttribute('data-id', place.id);
+    element.querySelector('.btn-remove').setAttribute('data-id', place.id);;
     return element;
 }
 
@@ -186,8 +290,8 @@ function downloadData() {
 window.onload = function () {
     downloadData()
     document.querySelector('.pagination').onclick = pageBtnHandler;
-    document.querySelector('.place-list').onclick = placeBtnHandler;
     document.querySelector('.delete-task-btn').onclick = deleteItem;
     document.querySelector('.search-btn').onclick = searchBtnHandler;
-    document.querySelector('.create-btn').onclick = createBtn;
+    document.getElementById('update-modal').addEventListener('show.bs.modal', prepareModalContent);
+    document.querySelector('.action-btn').onclick = actionBtnHandler;
 }
